@@ -1,0 +1,7 @@
+config_form.admin_api_form:
+  path: '/admin/config-form'
+  defaults:
+    _title: 'Fill the config form'
+    _form: 'Drupal\config_form\Form\ConfigForm'
+  requirements:
+    _permission: 'administer'
