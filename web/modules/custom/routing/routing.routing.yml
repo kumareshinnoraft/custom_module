@@ -7,3 +7,13 @@ routing.example:
     # Only users having mentioned permissions will be able to view the page.
     _permission: 'access the custom page'
 
+# This routing is for the 
+routing.campaign:
+  path: '/campaign/value/{num}'
+  defaults:
+    _title: 'Example'
+    _controller: '\Drupal\routing\Controller\RoutingController::parameter'
+  requirements:
+    _permission: 'access content'
+
+
