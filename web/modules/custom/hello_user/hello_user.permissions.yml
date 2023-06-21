@@ -1,0 +1,7 @@
+# This key name of the permission will be used further in code.
+hello user permission:
+  # Title of the permission will be viewed by administrator.
+  title: 'Permission for hello user.'
+  description: 'This permission is for further usage in programming.'
+  # This shows administrator a warning message.
+  restrict access: true
