@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for custom_hook module. Depending on when I wanted to
+ * triggered my hook I can mention it inside existing hooks.
+ */
+
+use Drupal\custom_hook\Plugin\Block\ExampleBlock;
+use Drupal\user\UserInterface;
+
+/**
+ * implements hook_user_login().
+ * 
+ * Whenever the user user will be logged in item_list will be called.
+ */
+function custom_hook_user_login(UserInterface $account) {
+  \Drupal::moduleHandler()->invokeAll('items_list', ExampleBlock::SHARED_DATA); 
+}
