@@ -2,6 +2,8 @@
 
 namespace Drupal\config_form\Form;
 
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Mail\MailManagerInterface;
@@ -24,7 +26,7 @@ class ConfigForm extends ConfigFormBase
    * This is the key of mail this class is sending which is checked in the hook
    * for further processing.
    */
-  public const MAIL_KEY = 'config_form_mail';  
+  public const MAIL_KEY = 'config_form_mail';
   /**
    * Mail Manager is used for sending mail in a secure way.
    *
@@ -112,12 +114,17 @@ class ConfigForm extends ConfigFormBase
         'female' => $this->t('Female'),
         'others' => $this->t('Other'),
       ],
-      '#required' => true,
+      '#required' => TRUE,
     ];
 
     $form['action']['submit'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Submit')
+      '#value' => $this->t('Submit'),
+      '#ajax' => [
+        'callback' => '::ajaxSubmitCallback',
+        'wrapper' => 'ajax-wrapper',
+        'effect' => 'fade',
+      ],
     ];
 
     return $form;
@@ -182,9 +189,27 @@ class ConfigForm extends ConfigFormBase
       $config = $this->config('config_form.settings');
       $config->set('email', $form_state->getValue('email'));
       $config->save();
-
-      // Fetching the data from the configuration.
-      \Drupal::messenger()->addMessage($this->t('Email sent successfully. And the mail from the configuration data is ' . \Drupal::config('config_form.settings')->get('email')));
     }
+  }
+
+  /**
+   * Ajax callback is used to get call after submitForm execution.
+   *
+   * @param array $form
+   *  Form that contains all data inserted into the form.
+   * @param  mixed $form_state
+   *  Form state handles the different state of the form form.
+   * @return object
+   *  Returning the response to the kernel for output.
+   */
+  public function ajaxSubmitCallback(array &$form, FormStateInterface $form_state)
+  {
+    $response = new AjaxResponse();
+    $response->addCommand(new HtmlCommand('#form-wrapper', $this->t('Form submitted successfully.')));
+
+    // Fetching the data from the configuration.
+    \Drupal::messenger()->addMessage($this->t('Email sent successfully. And the mail from the configuration data is ' . \Drupal::config('config_form.settings')->get('email')));
+
+    return $response;
   }
 }
