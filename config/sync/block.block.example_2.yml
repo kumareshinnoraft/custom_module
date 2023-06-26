@@ -1,0 +1,25 @@
+uuid: bbce4502-3b46-42eb-b02f-29ca333d0f84
+langcode: en
+status: true
+dependencies:
+  module:
+    - custom_hook
+    - system
+  theme:
+    - olivero
+id: example_2
+theme: olivero
+region: content
+weight: 0
+provider: null
+plugin: custom_hook_example
+settings:
+  id: custom_hook_example
+  label: Example
+  label_display: visible
+  provider: custom_hook
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/welcome\r\n/hello"

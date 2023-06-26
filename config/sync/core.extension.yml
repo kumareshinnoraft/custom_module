@@ -30,11 +30,11 @@ module:
   hello_user: 0
   help: 0
   history: 0
+  http_cache_control: 0
   image: 0
   link: 0
   menu_link_content: 0
   menu_ui: 0
-  mix: 0
   mysql: 0
   node: 0
   options: 0
