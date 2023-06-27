@@ -2,15 +2,15 @@
 
 namespace Drupal\config_form\Form;
 
-use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\CssCommand;
 use Drupal\Core\Ajax\HtmlCommand;
+use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\InvokeCommand;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Mail\MailManagerInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Config Form is for the administrator.
@@ -171,7 +171,7 @@ class ConfigForm extends ConfigFormBase
    */
   public function submitForm(array &$form, FormStateInterface $form_state)
   {
-    $this->sendMain($form_state);
+    $this->sendMail($form_state);
   }  
   /**
    * This function is called when ajax submission is required.
@@ -192,7 +192,6 @@ class ConfigForm extends ConfigFormBase
 
     if ($result === TRUE) {
 
-      // Success, Ajax feedback.
       // Make email green, for if it was red before.
       $response->addCommand(new CssCommand('#edit-email', ['border' => '1px solid #ced4da']));
       // Make message green, for if it was red.
@@ -205,7 +204,6 @@ class ConfigForm extends ConfigFormBase
       // Success message.
       $message = $this->t('Thanks! For Submitting The Form.');
       $response->addCommand(new HtmlCommand('.contact-form-result-message', $message));
-      
     }
     else {
       $response->addCommand(new CssCommand('.contact-form-result-message', ['color' => 'red']));
@@ -216,11 +214,10 @@ class ConfigForm extends ConfigFormBase
     \Drupal::messenger()->deleteAll();
 
     // Sending the mail to the user.
-    $this->sendMain($form_state);
+    $this->sendMail($form_state);
 
     return $response;
   }
-  
   /**
    * This function validates the form for ajax and normal calls.
    *
@@ -241,25 +238,29 @@ class ConfigForm extends ConfigFormBase
     if (!preg_match('/^[0-9]{10}$/', $phone_number)) {
 
       return $this->t('Invalid phone number. Please enter a 10-digit Indian number.');
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    } 
+    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
       return $this->t('Invalid email format');
-    } elseif (!in_array($email_domain, $public_domains)) {
+    } 
+    elseif (!in_array($email_domain, $public_domains)) {
 
       return $this->t('Only public email domains like Yahoo, Gmail, and Outlook are allowed.');
-    } elseif (substr($email, -strlen('.com')) !== '.com') {
+    } 
+    elseif (substr($email, -strlen('.com')) !== '.com') {
 
       return $this->t('Email does not ends with .com');
-    } elseif (empty($form_state->getValue('full_name'))) {
+    } 
+    elseif (empty($form_state->getValue('full_name'))) {
 
       return $this->t('Name should not be empty');
-    } elseif (empty($form_state->getValue('gender'))) {
+    } 
+    elseif (empty($form_state->getValue('gender'))) {
 
       return $this->t('Gender should not be empty');
     }
     return TRUE;
   }
-  
   /**
    * This function sends a demo mail to the user.
    *
@@ -269,7 +270,7 @@ class ConfigForm extends ConfigFormBase
    * @return void
    *  This function fire the mail and store data in the config.
    */
-  public function sendMain(FormStateInterface $form_state) {
+  public function sendMail(FormStateInterface $form_state) {
     $params['subject'] = 'My Subject';
     $params['body'] = 'Hello, this is the email body.';
     $email = (string) $form_state->getValue('email');
@@ -278,7 +279,8 @@ class ConfigForm extends ConfigFormBase
 
     if ($result['result'] !== TRUE) {
       \Drupal::messenger()->addError($this->t('Failed to send email.'));
-    } else {
+    } 
+    else {
       // Setting the email value in the configuration.
       $config = $this->config('config_form.settings');
       $config->set('email', $form_state->getValue('email'));
