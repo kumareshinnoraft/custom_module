@@ -11,7 +11,7 @@
  * This hook is a custom hook, and that block is present in the page. so now 
  * the custom hook should be available in the page.
  */
-function welcome_items_list($array)
-{
-  dd($array);
-}
+// function welcome_items_list($array)
+// {
+//   dd($array);
+// }

@@ -21,30 +21,20 @@ class WelcomeController extends ControllerBase {
    */
   public function build() {
 
-    // There are three ways to get current user.
-
-
-
-    // 1st
-    // $currentUser = $this->container()->get('current_user');
-
-    //2nd, get the current user and necessary information.
+    // Getting all information about the current user
     $currentUser        = Drupal::currentUser();
 
-    // Alternative functions can be called.
-    $administerContent  = $currentUser->hasPermission('administer content');
-    $authenticated      = $currentUser->isAuthenticated();
-    $anonymous          = $currentUser->isAnonymous();
-
-    // 3rd, get complete user entity.
+    // This provides fully User entity.
     $account = User::load($currentUser->id());
-
-    // Alternative approach.
-    // $build['#title'] = $this->t('Welcome User');
- 
+    
+    // Cache tag has been used to invalidate the cache when the user:1 tag is
+    // changed.
     return [
-      '#title'  => $this->t('Welcome ' . $account->getDisplayName()),
-      '#markup' => $this->t('This is the home page')
+      '#title'  => $this->t('Welcome ' . $currentUser->getAccountName()),
+      '#markup' => $this->t('This is the home page'),
+      '#cache'  => [
+        'tags' => $account->getCacheTags(),
+      ]
     ];    
   }
 }

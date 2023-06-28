@@ -4,7 +4,7 @@ welcome.welcome_page:
     _title: 'Welcome'
     _controller: '\Drupal\welcome\Controller\WelcomeController::build'
   requirements:
-    _permission: 'content_editor'
+    _permission: 'administer welcome configuration'
 
     
 
