@@ -4,6 +4,7 @@ namespace Drupal\hello_user\Controller;
 
 use Drupal;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\user\Entity\User;
 
 /**
  * Returns responses for welcome routes.
@@ -23,9 +24,16 @@ class HelloUserController extends ControllerBase {
     // Getting current logged user.
     $current_user = Drupal::currentUser();
 
+    // This provides fully User entity.
+    $account = User::load($current_user->id());
+
+    // Returning the tags for getting new user name when it is changed.
     return [
       '#title'  => $this->t('Welcome ' . $current_user->getDisplayName()),
-      '#markup' => $this->t('This is the home page')
+      '#markup' => $this->t('This is the home page'),
+      '#cache'  => [
+        'tags' => $account->getCacheTags()
+      ]
     ];
   }
 }
