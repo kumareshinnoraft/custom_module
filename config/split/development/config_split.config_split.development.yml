@@ -8,13 +8,12 @@ description: ''
 weight: 0
 folder: ../config/split/development
 module:
+  config_split: 0
+  devel: 0
   admin_toolbar: 0
   admin_toolbar_links_access_filter: 0
   admin_toolbar_search: 0
   admin_toolbar_tools: 0
-  config_split: 0
-  devel: 0
-  webprofiler: 0
 theme: {  }
 blacklist:
   - admin_toolbar.settings
@@ -22,7 +21,6 @@ blacklist:
   - admin_toolbar_tools.settings
   - devel.settings
   - devel.toolbar.settings
-  - webprofiler.settings
 graylist: {  }
 graylist_dependents: true
 graylist_skip_equal: true
