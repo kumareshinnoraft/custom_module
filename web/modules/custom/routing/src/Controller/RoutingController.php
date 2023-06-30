@@ -3,8 +3,10 @@
 namespace Drupal\routing\Controller;
 
 use Drupal;
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 /**
@@ -27,14 +29,6 @@ class RoutingController extends ControllerBase
    */
   public function build()
   {
-    // Getting the current user.
-    $currentUser = Drupal::currentUser();
-
-    // Find the roles from the array.
-    if (in_array('content_editor', $currentUser->getRoles())) {
-      throw new AccessDeniedHttpException();
-    }
-
     // Returning a simply welcome message to the user.
     return [
       '#title' => $this->t('Welcome')
@@ -55,5 +49,19 @@ class RoutingController extends ControllerBase
     return [
       '#title' => $this->t('Welcome ' . $request->get('num'))
     ];
+  }
+
+  /**
+   * Custom access callback for the route.
+   *
+   * @return AccessResult
+   */
+  public function access() {
+    // Checking if the user has the permission to access the page.
+    if (Drupal::currentUser()->hasPermission('access the custom page')) {
+      // User has the permission, allow access.
+      return AccessResult::neutral();
+    }
+    return AccessResult::forbidden();
   }
 }
