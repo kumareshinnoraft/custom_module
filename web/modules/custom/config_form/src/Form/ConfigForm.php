@@ -96,6 +96,10 @@ class ConfigForm extends ConfigFormBase
       '#type' => 'textfield',
       '#title' => $this->t('Full Name'),
       '#required' => TRUE,
+      '#ajax' => [
+        'callback' => '::ajaxSubmit',
+        'event' => 'submit',
+      ],
       '#suffix' => '<span id="full-name-error" class="error"></span></div></div>'
     ];
 
@@ -104,6 +108,10 @@ class ConfigForm extends ConfigFormBase
       '#type' => 'tel',
       '#title' => $this->t('Phone Number'),
       '#required' => TRUE,
+      '#ajax' => [
+        'callback' => '::ajaxSubmit',
+        'event' => 'submit',
+      ],
       '#suffix' => '<span id="phone-number-error" class="error"></span></div></div>'
     ];
 
@@ -112,6 +120,10 @@ class ConfigForm extends ConfigFormBase
       '#type' => 'email',
       '#title' => $this->t('Email'),
       '#required' => TRUE,
+      '#ajax' => [
+        'callback' => '::ajaxSubmit',
+        'event' => 'submit',
+      ],
       '#suffix' => '<span id="email-error" class="error"></span></div></div>'
     ];
 
@@ -123,6 +135,10 @@ class ConfigForm extends ConfigFormBase
         'male' => $this->t('Male'),
         'female' => $this->t('Female'),
         'others' => $this->t('Other'),
+      ],
+      '#ajax' => [
+        'callback' => '::ajaxSubmit',
+        'event' => 'submit',
       ],
       '#required' => TRUE,
       '#suffix' => '<span id="gender-error" class="error"></span></div></div>'
@@ -142,19 +158,118 @@ class ConfigForm extends ConfigFormBase
   }
 
   /**
-   * This function validate the form input data and checks the conditions.
+   * This function is called when ajax submission is required.
    *
-   * @param array
-   *   Form is the array with a reference.
-   * @param FormStateInterface
-   *   Holds the values of the input data.
-   *
-   * @return void
-   *   This function is validating the input data.
+   * @param array $form
+   *   Form array containing the of the form elements.
+   * @param  mixed $form_state
+   *   Form state holds the values of input data.
+   * 
+   * @return Response
+   *   This response is the ajax response data.
    */
-  public function validateForm(array &$form, FormStateInterface $form_state)
+  public function ajaxSubmit(array &$form, FormStateInterface $form_state)
   {
-    \Drupal::messenger()->addMessage($this->validate($form_state));
+    // Initiate response.
+    $response = new AjaxResponse();
+    $result = $this->validate($response, $form_state);
+    $triggering_element = $form_state->getTriggeringElement();
+
+
+    if ($result === TRUE && $triggering_element['#type'] === 'submit') {
+
+      // Make email green, for if it was red before.
+      $response->addCommand(new CssCommand('#edit-email', ['border' => '1px solid #ced4da']));
+      // Make message green, for if it was red.
+      $response->addCommand(new CssCommand('.contact-form-result-message', ['color' => 'green']));
+      // Empty all fields, flood control.
+      $response->addCommand(new InvokeCommand('#edit-full-name', 'val', ['']));
+      $response->addCommand(new InvokeCommand('#edit-last-name', 'val', ['']));
+      $response->addCommand(new InvokeCommand('#edit-email', 'val', ['']));
+      $response->addCommand(new InvokeCommand('#edit-phone-number', 'val', ['']));
+
+      // Success message.
+      $message = $this->t('Thanks! For Submitting The Form.');
+      $response->addCommand(new HtmlCommand('.contact-form-result-message', $message));
+    } 
+
+    // Deleting all messenger messages to avoid confusions.
+    \Drupal::messenger()->deleteAll();
+
+    return $response;
+  }
+
+  /**
+   * This function validates the form for ajax and normal calls.
+   *
+   * @param FormStateInterface $form_state
+   *   This variable holds the form state.
+   * @param AjaxResponse $response
+   *   This ajax response is for altering the HTML fields in the form.
+   * 
+   * @return mixed
+   *   On successful validation this function returns TRUE, otherwise array.
+   */
+  public function validate(AjaxResponse $response, FormStateInterface $form_state)
+  {
+    $phone_number = $form_state->getValue('phone_number');
+    $email = $form_state->getValue('email');
+
+    $flag = TRUE;
+
+    // Listing public domains
+    $public_domains = ['yahoo.com', 'gmail.com', 'outlook.com', '126', 'innoraft.com'];
+    $email_domain = substr(strrchr($email, "@"), 1);
+
+    if (empty($form_state->getValue('full_name'))) {
+      $flag = FALSE;
+      $response->addCommand(new CssCommand('#full-name-error', ['color' => 'red']));
+      $response->addCommand(new HtmlCommand('#full-name-error', $this->t('Please enter full name.')));
+    } 
+    else {
+      $response->addCommand(new HtmlCommand('#full-name-error', ''));
+    }
+    
+    if (!preg_match('/^[0-9]{10}$/', $phone_number)) {
+      $flag = FALSE;
+      $response->addCommand(new CssCommand('#phone-number-error', ['color' => 'red']));
+      $response->addCommand(new HtmlCommand('#phone-number-error', $this->t('Invalid phone number. Please enter a 10-digit Indian number.')));
+    }
+    else {
+      $response->addCommand(new HtmlCommand('#phone-number-error', ''));
+    }
+    
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $flag = FALSE;
+      $response->addCommand(new CssCommand('#email-error', ['color' => 'red']));
+      $response->addCommand(new HtmlCommand('#email-error', $this->t('Invalid email format.')));
+    } 
+    elseif (!in_array($email_domain, $public_domains)) {
+      $flag = FALSE;
+      $response->addCommand(new CssCommand('#email-error', ['color' => 'red']));
+      $response->addCommand(new HtmlCommand('#email-error', $this->t('Only public email domains like Yahoo, Gmail, and Outlook are allowed.')));
+    } 
+    elseif (substr($email, -strlen('.com')) !== '.com') {
+      $flag = FALSE;
+      $response->addCommand(new CssCommand('#email-error', ['color' => 'red']));
+      $response->addCommand(new HtmlCommand('#email-error', $this->t('Email does not ends with .com')));
+    } 
+    else {
+      $response->addCommand(new HtmlCommand('#email-error', ''));
+    }
+    
+    if (empty($form_state->getValue('gender'))) {
+      $flag = FALSE;
+      $response->addCommand(new CssCommand('#gender-error', ['color' => 'red']));
+      $response->addCommand(new HtmlCommand('#gender-error', $this->t('Gender should not be empty.')));
+
+      return [$this->t('Gender should not be empty'), '#gender-error'];
+    }
+    else {
+      $response->addCommand(new HtmlCommand('#gender-error', ''));
+    }
+
+    return $flag;
   }
 
   /**
@@ -171,120 +286,6 @@ class ConfigForm extends ConfigFormBase
    */
   public function submitForm(array &$form, FormStateInterface $form_state)
   {
-    $this->sendMail($form_state);
-  }  
-  /**
-   * This function is called when ajax submission is required.
-   *
-   * @param array $form
-   *   Form array containing the of the form elements.
-   * @param  mixed $form_state
-   *   Form state holds the values of input data.
-   * 
-   * @return Response
-   *   This response is the ajax response data.
-   */
-  public function ajaxSubmit(array &$form, FormStateInterface $form_state)
-  {
-    // Initiate response.
-    $response = new AjaxResponse();
-    $result = $this->validate($form_state);
-
-    if ($result === TRUE) {
-
-      // Make email green, for if it was red before.
-      $response->addCommand(new CssCommand('#edit-email', ['border' => '1px solid #ced4da']));
-      // Make message green, for if it was red.
-      $response->addCommand(new CssCommand('.contact-form-result-message', ['color' => 'green']));
-      // Empty all fields, flood control.
-      $response->addCommand(new InvokeCommand('#edit-full-name', 'val', ['']));
-      $response->addCommand(new InvokeCommand('#edit-last-name', 'val', ['']));
-      $response->addCommand(new InvokeCommand('#edit-email', 'val', ['']));
-      $response->addCommand(new InvokeCommand('#edit-phone-number', 'val', ['']));
-      // Success message.
-      $message = $this->t('Thanks! For Submitting The Form.');
-      $response->addCommand(new HtmlCommand('.contact-form-result-message', $message));
-    }
-    else {
-      $response->addCommand(new CssCommand('.contact-form-result-message', ['color' => 'red']));
-      $response->addCommand(new HtmlCommand('.contact-form-result-message', $result));
-    }
-
-    // Deleting all messenger messages to avoid confusions.
-    \Drupal::messenger()->deleteAll();
-
-    // Sending the mail to the user.
-    $this->sendMail($form_state);
-
-    return $response;
-  }
-  /**
-   * This function validates the form for ajax and normal calls.
-   *
-   * @param FormStateInterface $form_state
-   *   This variable holds the form state.
-   * 
-   * @return mixed
-   *   On successful validation this function returns TRUE, otherwise String.
-   */
-  public function validate(FormStateInterface $form_state) {
-    $phone_number = $form_state->getValue('phone_number');
-    $email = $form_state->getValue('email');
-
-    // Listing public domains
-    $public_domains = ['yahoo.com', 'gmail.com', 'outlook.com', '126', 'innoraft.com'];
-    $email_domain = substr(strrchr($email, "@"), 1);
-
-    if (!preg_match('/^[0-9]{10}$/', $phone_number)) {
-
-      return $this->t('Invalid phone number. Please enter a 10-digit Indian number.');
-    } 
-    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-
-      return $this->t('Invalid email format');
-    } 
-    elseif (!in_array($email_domain, $public_domains)) {
-
-      return $this->t('Only public email domains like Yahoo, Gmail, and Outlook are allowed.');
-    } 
-    elseif (substr($email, -strlen('.com')) !== '.com') {
-
-      return $this->t('Email does not ends with .com');
-    } 
-    elseif (empty($form_state->getValue('full_name'))) {
-
-      return $this->t('Name should not be empty');
-    } 
-    elseif (empty($form_state->getValue('gender'))) {
-
-      return $this->t('Gender should not be empty');
-    }
-    return TRUE;
-  }
-  /**
-   * This function sends a demo mail to the user.
-   *
-   * @param FormStateInterface $form_state  
-   *    This variable holds the form state.
-   * 
-   * @return void
-   *  This function fire the mail and store data in the config.
-   */
-  public function sendMail(FormStateInterface $form_state) {
-    $params['subject'] = 'My Subject';
-    $params['body'] = 'Hello, this is the email body.';
-    $email = (string) $form_state->getValue('email');
-
-    $result = $this->mailManager->mail(ConfigForm::MODULE_NAME, ConfigForm::MAIL_KEY, $email, \Drupal::currentUser()->getPreferredLangcode(), $params, null, TRUE);
-
-    if ($result['result'] !== TRUE) {
-      \Drupal::messenger()->addError($this->t('Failed to send email.'));
-    } 
-    else {
-      // Setting the email value in the configuration.
-      $config = $this->config('config_form.settings');
-      $config->set('email', $form_state->getValue('email'));
-      $config->save();
-    }
+    // As ajax is used in this form, submit form left as empty.
   }
 }
