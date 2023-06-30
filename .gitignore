@@ -69,7 +69,6 @@ web/modules/custom/campaign
 web/modules/custom/welcome_block
 web/modules/custom/services
 web/modules/custom/custom_hook
-web/modules/custom/routing
 web/modules/custom/welcome
 web/modules/custom/ajax_form/
 web/modules/custom/confirm_form/
