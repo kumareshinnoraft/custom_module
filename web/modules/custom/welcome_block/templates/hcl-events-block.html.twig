@@ -1,0 +1,13 @@
+<h3 id='title'>FLAGSHIP PROGRAMMES</h3>
+  <div class="cardContainer">
+{% for item in content %}
+  <div class="card">
+    <div class="group-name">{{ item.group_name }}</div>
+    <div class="line"></div>
+    <div class="label1">{{ item.label1 }}</div>
+    <div class="value1">{{ item.value1 }}</div>
+    <div class="label2">{{ item.label2 }}</div>
+    <div class="value2">{{ item.value2 }}</div>
+  </div>
+{% endfor %}
+</div>
