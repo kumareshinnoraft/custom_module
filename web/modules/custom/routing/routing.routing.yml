@@ -1,4 +1,4 @@
-routing.example:
+routing.permission:
   path: '/routing'
   defaults:
     _title: 'Example'
@@ -6,6 +6,7 @@ routing.example:
   requirements:
     # Only users having mentioned permissions will be able to view the page.
     _permission: 'access the custom page'
+    _custom_access: '\Drupal\routing\Controller\CustomPageController::access'
 
 # This routing is for the 
 routing.campaign:
