@@ -2,12 +2,12 @@
 
 namespace Drupal\config_form\Form;
 
+use Drupal\Core\Form\FormBase;
 use Drupal\user\Entity\User;
 use Drupal\Core\Ajax\CssCommand;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Component\Utility\Html;
-use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
@@ -15,7 +15,7 @@ use Drupal\Core\Form\FormStateInterface;
  * 
  * @package Drupal\config_form\Form
  */
-class GenerateLoginLink extends ConfigFormBase
+class GenerateLoginLink extends FormBase
 {
 
   /**
@@ -23,7 +23,7 @@ class GenerateLoginLink extends ConfigFormBase
    */
   public function getFormId()
   {
-    return 'config_form_generate_login_link';
+    return 'generate_login_link';
   }
 
   /**
@@ -43,11 +43,10 @@ class GenerateLoginLink extends ConfigFormBase
       '#prefix' => '<div class="row"><div class="col-12">',
       '#type'   => 'number',
       '#title'  => $this->t('Please Enter Your User Id'),
-      '#default_value' => $this->config('config_form.settings')->get('example'),
       '#ajax'   => [
         'callback' => '::findUser',
         'effect'   => 'fade',
-        'event'    => 'change'
+        'event'    => 'keyup'
       ],
       '#suffix' => '<span id="user-id" class="error"></span></div>',
     ];
