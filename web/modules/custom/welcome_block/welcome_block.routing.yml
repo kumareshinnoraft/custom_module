@@ -1,0 +1,7 @@
+custom_welcome_page.routing:
+  path: '/custom-welcome-page'
+  defaults:
+    _title: 'Welcome'
+    _controller: '\Drupal\welcome_block\Controller\WelcomeBlockController::build'
+  requirements:
+    _permission: 'access content'
