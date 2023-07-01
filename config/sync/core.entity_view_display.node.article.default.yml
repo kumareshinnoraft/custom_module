@@ -6,12 +6,15 @@ dependencies:
     - core.entity_view_display.comment.comment.default
     - field.field.node.article.body
     - field.field.node.article.comment
+    - field.field.node.article.field_custom_field
     - field.field.node.article.field_image
+    - field.field.node.article.field_rgb_color
     - field.field.node.article.field_tags
     - image.style.wide
     - node.type.article
   module:
     - comment
+    - custom_field
     - image
     - text
     - user
@@ -38,16 +41,31 @@ content:
     third_party_settings: {  }
     weight: 110
     region: content
+  field_custom_field:
+    type: custom_field_custom_field_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 111
+    region: content
   field_image:
     type: image
     label: hidden
     settings:
-      image_style: wide
       image_link: ''
+      image_style: wide
       image_loading:
         attribute: lazy
     third_party_settings: {  }
     weight: -1
+    region: content
+  field_rgb_color:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 112
     region: content
   field_tags:
     type: entity_reference_label

@@ -1,4 +1,4 @@
-uuid: 2f0e0f35-98af-4e5a-ad69-658b1b4e5039
+uuid: 6d7e94ff-b913-4759-964a-8b633f003ede
 langcode: en
 status: true
 dependencies:
@@ -7,16 +7,16 @@ dependencies:
     - welcome_block
   theme:
     - olivero
-id: welcomeblock
+id: olivero_flagshipprogrammes
 theme: olivero
-region: sidebar
+region: content_above
 weight: 0
 provider: null
-plugin: welcome_block
+plugin: welcome_block_event
 settings:
-  id: welcome_block
-  label: 'Welcome Block'
-  label_display: visible
+  id: welcome_block_event
+  label: 'FLAGSHIP PROGRAMMES'
+  label_display: '0'
   provider: welcome_block
 visibility:
   request_path:

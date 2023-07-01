@@ -6,7 +6,9 @@ dependencies:
     - core.entity_view_mode.node.rss
     - field.field.node.article.body
     - field.field.node.article.comment
+    - field.field.node.article.field_custom_field
     - field.field.node.article.field_image
+    - field.field.node.article.field_rgb_color
     - field.field.node.article.field_tags
     - node.type.article
   module:
@@ -24,5 +26,7 @@ content:
 hidden:
   body: true
   comment: true
+  field_custom_field: true
   field_image: true
+  field_rgb_color: true
   field_tags: true

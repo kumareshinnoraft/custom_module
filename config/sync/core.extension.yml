@@ -23,6 +23,9 @@ module:
   confirm_form: 0
   contact: 0
   contextual: 0
+  custom_color_field: 0
+  custom_field: 0
+  custom_form_example: 0
   custom_module: 0
   datetime: 0
   dblog: 0

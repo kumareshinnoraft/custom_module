@@ -7,7 +7,6 @@ dependencies:
     - node.type.page
     - taxonomy.vocabulary.tags
   module:
-    - campaign
     - comment
     - contextual
     - file
@@ -27,7 +26,6 @@ permissions:
   - 'access content overview'
   - 'access contextual links'
   - 'access files overview'
-  - 'access the custom page'
   - 'access tour'
   - 'administer url aliases'
   - 'create article content'
