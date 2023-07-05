@@ -2,8 +2,8 @@
 
 namespace Drupal\config_form\Form;
 
-use Drupal\Core\Form\FormBase;
 use Drupal\user\Entity\User;
+use Drupal\Core\Form\FormBase;
 use Drupal\Core\Ajax\CssCommand;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Ajax\AjaxResponse;

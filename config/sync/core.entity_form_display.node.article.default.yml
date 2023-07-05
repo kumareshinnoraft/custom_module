@@ -5,15 +5,14 @@ dependencies:
   config:
     - field.field.node.article.body
     - field.field.node.article.comment
-    - field.field.node.article.field_custom_field
     - field.field.node.article.field_image
-    - field.field.node.article.field_rgb_color
+    - field.field.node.article.field_rgb
     - field.field.node.article.field_tags
     - image.style.thumbnail
     - node.type.article
   module:
     - comment
-    - custom_field
+    - custom_rgb
     - image
     - path
     - text
@@ -46,12 +45,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_custom_field:
-    type: custom_field_custom_field
-    weight: 121
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   field_image:
     type: image_image
     weight: 1
@@ -60,13 +53,11 @@ content:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
-  field_rgb_color:
-    type: string_textfield
-    weight: 122
+  field_rgb:
+    type: custom_rgb_field
+    weight: 121
     region: content
-    settings:
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete_tags

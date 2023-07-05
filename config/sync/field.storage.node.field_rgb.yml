@@ -1,16 +1,16 @@
-uuid: c32497d7-c385-43ba-b199-ddad0c2c458d
+uuid: fe9dc854-cff5-488d-80d0-209ecd12b424
 langcode: en
 status: true
 dependencies:
   module:
-    - custom_field
+    - custom_rgb
     - node
-id: node.field_custom_field
-field_name: field_custom_field
+id: node.field_rgb
+field_name: field_rgb
 entity_type: node
-type: custom_field_custom_field
+type: custom_rgb_field
 settings: {  }
-module: custom_field
+module: custom_rgb
 locked: false
 cardinality: 1
 translatable: true

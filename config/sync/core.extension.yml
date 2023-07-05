@@ -1,6 +1,7 @@
 _core:
   default_config_hash: R4IF-ClDHXxblLcG0L7MgsLvfBIMAvi_skumNFQwkDc
 module:
+  welcome: -100
   action: 0
   action_example: 0
   ajax_example: 0
@@ -16,6 +17,7 @@ module:
   cache_form: 0
   campaign: 0
   ckeditor5: 0
+  color_field: 0
   comment: 0
   config: 0
   config_filter: 0
@@ -23,10 +25,9 @@ module:
   confirm_form: 0
   contact: 0
   contextual: 0
-  custom_color_field: 0
-  custom_field: 0
   custom_form_example: 0
   custom_module: 0
+  custom_rgb: 0
   datetime: 0
   dblog: 0
   dynamic_page_cache: 0
@@ -45,6 +46,7 @@ module:
   link: 0
   menu_link_content: 0
   menu_ui: 0
+  modules_weight: 0
   mysql: 0
   node: 0
   options: 0
@@ -70,7 +72,6 @@ module:
   views_custom_cache_tag: 0
   views_custom_cache_tag_demo: 0
   views_ui: 0
-  welcome: 0
   welcome_block: 0
   views: 10
 theme:

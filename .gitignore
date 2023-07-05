@@ -74,4 +74,6 @@ web/modules/custom/confirm_form/
 web/modules/custom/cache_form/
 web/modules/custom/custom_form_example/
 web/modules/custom/custom_field/
-
+web/modules/custom/custom_color_field/
+web/modules/custom/conditional_form/
+web/modules/custom/multistep_form/

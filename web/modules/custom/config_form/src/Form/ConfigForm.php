@@ -175,7 +175,6 @@ class ConfigForm extends ConfigFormBase
     $result = $this->validate($response, $form_state);
     $triggering_element = $form_state->getTriggeringElement();
 
-
     if ($result === TRUE && $triggering_element['#type'] === 'submit') {
 
       // Make email green, for if it was red before.
@@ -214,7 +213,6 @@ class ConfigForm extends ConfigFormBase
   {
     $phone_number = $form_state->getValue('phone_number');
     $email = $form_state->getValue('email');
-
     $flag = TRUE;
 
     // Listing public domains
