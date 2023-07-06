@@ -29,14 +29,6 @@ class GenerateLoginLink extends FormBase
   /**
    * {@inheritdoc}
    */
-  protected function getEditableConfigNames()
-  {
-    return ['user_login_link.settings'];
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function buildForm(array $form, FormStateInterface $form_state)
   {
     $form['user_id'] = [
