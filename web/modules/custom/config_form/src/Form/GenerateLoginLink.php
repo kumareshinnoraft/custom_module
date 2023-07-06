@@ -2,8 +2,8 @@
 
 namespace Drupal\config_form\Form;
 
-use Drupal\Core\Form\FormBase;
 use Drupal\user\Entity\User;
+use Drupal\Core\Form\FormBase;
 use Drupal\Core\Ajax\CssCommand;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Ajax\AjaxResponse;
@@ -24,14 +24,6 @@ class GenerateLoginLink extends FormBase
   public function getFormId()
   {
     return 'generate_login_link';
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function getEditableConfigNames()
-  {
-    return ['user_login_link.settings'];
   }
 
   /**
