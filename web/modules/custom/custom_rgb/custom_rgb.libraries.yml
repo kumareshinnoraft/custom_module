@@ -1,0 +1,4 @@
+custom_rgb_field:
+  css:
+    component:
+      css/custom-rgb-field-widget.css: {}

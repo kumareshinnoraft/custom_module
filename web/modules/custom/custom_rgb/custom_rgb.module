@@ -1,0 +1,15 @@
+<?php 
+
+/**
+ * Implements hook_theme().
+ */
+function custom_rgb_theme($existing, $type, $theme, $path) {
+  return [
+    'custom_rgb_color_picker' => [
+      'template' => 'custom-rgb-color-picker',
+      'variables' => [
+        'content' => NULL,
+      ],
+    ],
+  ];
+}
