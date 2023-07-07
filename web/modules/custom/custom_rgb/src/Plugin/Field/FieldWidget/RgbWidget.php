@@ -20,18 +20,15 @@ use Drupal\Core\Field\FieldItemListInterface;
  *   }
  * )
  */
-class RgbWidget extends WidgetBase
+class RgbWidget extends FieldWidgetBase
 {
   /**
    * {@inheritdoc}
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state)
   {
-    // Get the current user.
-    $current_user = \Drupal::currentUser();
-
     // Check if the user has the 'administrator' role.
-    if ($current_user->hasRole('administrator')) {
+    if ($this->isAdminUser()) {
       $values = Json::decode(isset($items[$delta]->rgb_value) ? $items[$delta]->rgb_value : '');
 
       $element['rgb_value'] = [

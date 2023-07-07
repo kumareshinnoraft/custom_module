@@ -4,7 +4,11 @@ namespace Drupal\custom_rgb\Plugin\Field\FieldWidget;
 
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Field\FieldItemListInterface;
+use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Defines the 'custom_rgb_field' field widget.
@@ -20,19 +24,22 @@ use Drupal\Core\Field\FieldItemListInterface;
  * 
  * @package Drupal\custom_rgb\Plugin\Field\FieldWidget
  */
-class ColorPickerWidget extends WidgetBase
+class ColorPickerWidget extends FieldWidgetBase implements ContainerFactoryPluginInterface
 {
+  /**
+   * This object is the storage of the user entity.
+   *
+   * @var object
+   */
+  private $currentUser;
 
   /**
    * {@inheritdoc}
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state)
   {
-    // Get the current user.
-    $current_user = \Drupal::currentUser();
-
     // Check if the user has the 'administrator' role.
-    if ($current_user->hasRole('administrator')) {
+    if ($this->isAdminUser()) {
 
       $element['color_picker'] = [
         '#type' => 'color',

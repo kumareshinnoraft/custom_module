@@ -6,9 +6,9 @@
  * triggered my hook I can mention it inside existing hooks.
  */
 
-use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\user\UserInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 
 /**
  * implements hook_user_login().
@@ -39,7 +39,8 @@ function custom_hook_node_view(array &$build, EntityInterface $entity, EntityVie
     // If this is the first time they've viewed the page we need to start the
     // counter.
     $current_counts[$entity->id()] = 1;
-  } else {
+  } 
+  else {
 
     // If they have already viewed this page just increment the existing
     // counter.

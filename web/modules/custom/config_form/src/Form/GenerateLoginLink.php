@@ -9,6 +9,8 @@ use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Entity\EntityTypeManager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * This form is for generating the one time login link for the user.
@@ -17,6 +19,32 @@ use Drupal\Core\Form\FormStateInterface;
  */
 class GenerateLoginLink extends FormBase
 {
+
+  /**
+   * This object is the storage of the user entity.
+   *
+   * @var object
+   */
+  private $userData;
+
+  /**
+   * Constructor accepting the service of Entity type manager.
+   *
+   * @param object 
+   *   Entity manager is used to get the user entity.
+   */
+  public function __construct(EntityTypeManager $entity_type_manager)
+  {
+    $this->userData = $entity_type_manager->getStorage('user');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container)
+  {
+    return new static($container->get('entity_type.manager'));
+  }
 
   /**
    * {@inheritdoc}
@@ -67,6 +95,7 @@ class GenerateLoginLink extends FormBase
 
     // Loading the user from the user ID.
     $account = User::load($val);
+    $account = $this->userData->load($val);
 
     // If the user is NULL return an error message.
     if ($account === NULL) {

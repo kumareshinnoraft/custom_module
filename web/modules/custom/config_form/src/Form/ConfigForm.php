@@ -8,9 +8,7 @@ use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\InvokeCommand;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Mail\MailManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Config Form is for the administrator.
@@ -24,37 +22,6 @@ class ConfigForm extends ConfigFormBase
    * by calling them directly through the class name.
    */
   public const MODULE_NAME = 'config_form';
-
-  /**
-   * This is the key of mail this class is sending which is checked in the hook
-   * for further processing.
-   */
-  public const MAIL_KEY = 'config_form_mail';
-  /**
-   * Mail Manager is used for sending mail in a secure way.
-   *
-   * @var MailManagerInterface
-   */
-  private $mailManager;
-
-  /**
-   * Constructor accepting the service of mail manager.
-   *
-   * @param object $mail_manager_interface
-   *   Mail Manager Interface provides ability to send email.
-   */
-  public function __construct(MailManagerInterface $mail_manager_interface)
-  {
-    $this->mailManager = $mail_manager_interface;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container)
-  {
-    return new static($container->get('plugin.manager.mail'));
-  }
 
   /**
    * Creating a unique form id for the config form.

@@ -21,7 +21,7 @@ use Drupal\Core\Form\FormStateInterface;
  * 
  * @package Drupal\custom_rgb\Plugin\Field\FieldWidget
  */
-class HexWidget extends WidgetBase
+class HexWidget extends FieldWidgetBase
 {
 
   /**
@@ -29,11 +29,8 @@ class HexWidget extends WidgetBase
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state)
   {
-    // Get the current user.
-    $current_user = \Drupal::currentUser();
-
     // Check if the user has the 'administrator' role.
-    if ($current_user->hasRole('administrator')) {
+    if ($this->isAdminUser()) {
 
       $element['six_digit_hex_code'] = [
         '#type' => 'textfield',
