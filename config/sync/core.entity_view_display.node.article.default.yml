@@ -6,15 +6,12 @@ dependencies:
     - core.entity_view_display.comment.comment.default
     - field.field.node.article.body
     - field.field.node.article.comment
-    - field.field.node.article.field_image
-    - field.field.node.article.field_rgb
+    - field.field.node.article.field_custom_color_field
     - field.field.node.article.field_tags
-    - image.style.wide
     - node.type.article
   module:
     - comment
     - custom_rgb
-    - image
     - text
     - user
 _core:
@@ -40,18 +37,7 @@ content:
     third_party_settings: {  }
     weight: 110
     region: content
-  field_image:
-    type: image
-    label: hidden
-    settings:
-      image_link: ''
-      image_style: wide
-      image_loading:
-        attribute: lazy
-    third_party_settings: {  }
-    weight: -1
-    region: content
-  field_rgb:
+  field_custom_color_field:
     type: custom_rgb_field_default
     label: above
     settings: {  }

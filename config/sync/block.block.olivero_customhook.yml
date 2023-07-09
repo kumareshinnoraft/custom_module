@@ -1,23 +1,23 @@
-uuid: 2f0e0f35-98af-4e5a-ad69-658b1b4e5039
+uuid: 48d9683a-72de-49ad-afd8-fd5d70edc52f
 langcode: en
 status: true
 dependencies:
   module:
+    - custom_hook
     - system
-    - welcome_block
   theme:
     - olivero
-id: welcomeblock
+id: olivero_customhook
 theme: olivero
-region: sidebar
+region: content
 weight: 0
 provider: null
-plugin: welcome_block
+plugin: custom_hook_example
 settings:
-  id: welcome_block
-  label: 'Welcome Block'
+  id: custom_hook_example
+  label: 'Custom Hook'
   label_display: visible
-  provider: welcome_block
+  provider: custom_hook
 visibility:
   request_path:
     id: request_path

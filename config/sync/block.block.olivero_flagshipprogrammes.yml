@@ -1,4 +1,4 @@
-uuid: 6d7e94ff-b913-4759-964a-8b633f003ede
+uuid: c2b2d42c-1b8a-4d7f-ab06-6ce329087be0
 langcode: en
 status: true
 dependencies:
@@ -16,7 +16,7 @@ plugin: welcome_block_event
 settings:
   id: welcome_block_event
   label: 'FLAGSHIP PROGRAMMES'
-  label_display: '0'
+  label_display: visible
   provider: welcome_block
 visibility:
   request_path:

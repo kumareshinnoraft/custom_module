@@ -1,16 +1,16 @@
-uuid: 97241762-f921-4113-ba14-80ae64b6f984
+uuid: bec0acd0-4476-4ab9-9797-c985ad196834
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_rgb
-    - node.type.article
+    - node.type.page
   module:
     - custom_rgb
-id: node.article.field_rgb
+id: node.page.field_rgb
 field_name: field_rgb
 entity_type: node
-bundle: article
+bundle: page
 label: RGB
 description: ''
 required: false

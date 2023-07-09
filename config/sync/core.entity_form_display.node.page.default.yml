@@ -4,8 +4,11 @@ status: true
 dependencies:
   config:
     - field.field.node.page.body
+    - field.field.node.page.field_color
+    - field.field.node.page.field_rgb
     - node.type.page
   module:
+    - custom_rgb
     - path
     - text
 _core:
@@ -28,6 +31,18 @@ content:
   created:
     type: datetime_timestamp
     weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_color:
+    type: custom_rgb_field
+    weight: 122
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_rgb:
+    type: custom_rgb_field
+    weight: 121
     region: content
     settings: {  }
     third_party_settings: {  }
