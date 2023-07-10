@@ -189,6 +189,11 @@ class HclEvents extends ConfigFormBase
     if (isset($tag_values[$tag_index])) {
       unset($tag_values[$tag_index]);
       $form_state->set('tag_values', $tag_values);
+
+      if ($form_state->get('tag_values') === []) {
+        $this->addOneTag($form, $form_state);
+      }
+
       $form_state->setRebuild(TRUE);
     }
   }
