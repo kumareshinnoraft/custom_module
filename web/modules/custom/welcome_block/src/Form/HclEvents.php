@@ -146,7 +146,7 @@ class HclEvents extends ConfigFormBase
    * This function add a new tag in the form.
    * 
    * @param array $form
-   *   This array contains form informations.
+   *   This array contains form information's.
    * @param FormStateInterface $form_state
    *   This tracks the form states.
    * 
@@ -155,7 +155,7 @@ class HclEvents extends ConfigFormBase
    */
   public function addOneTag(array &$form, FormStateInterface $form_state)
   {
-    // Fetching the vallues from
+    // Fetching the values from
     $tag_values = $form_state->get('tag_values');
     $tag_values[] = [
       'group_name' => '',
@@ -173,7 +173,7 @@ class HclEvents extends ConfigFormBase
    * update the value present in the array $tag_values.
    * 
    * @param array $form
-   *   This array contains form informations.
+   *   This array contains form information's.
    * @param FormStateInterface $form_state
    *   This tracks the form states.
    * 
@@ -189,6 +189,11 @@ class HclEvents extends ConfigFormBase
     if (isset($tag_values[$tag_index])) {
       unset($tag_values[$tag_index]);
       $form_state->set('tag_values', $tag_values);
+
+      if ($form_state->get('tag_values') === []) {
+        $this->addOneTag($form, $form_state);
+      }
+
       $form_state->setRebuild(TRUE);
     }
   }
@@ -198,7 +203,7 @@ class HclEvents extends ConfigFormBase
    * refresh the page.
    * 
    * @param array $form
-   *   This array contains form informations.
+   *   This array contains form information's.
    * @param FormStateInterface $form_state
    *   This tracks the form states.
    * 
