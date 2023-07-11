@@ -82,3 +82,7 @@ web/modules/custom/custom_event/
 web/modules/custom/advertiser/
 web/modules/custom/movie/
 web/modules/custom/books/
+web/modules/custom/custom_bundle/
+web/modules/custom/custom_blog/
+web/modules/custom/book_detail/
+web/modules/custom/override_function/
