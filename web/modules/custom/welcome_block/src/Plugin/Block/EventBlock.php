@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Drupal\welcome_block\Plugin\Block;
 
@@ -69,10 +69,10 @@ class EventBlock extends BlockBase implements ContainerFactoryPluginInterface {
       '#theme' => 'hcl_events_block',
       '#content' => $tagValues,
       '#cache' => [
-        'tags' => ['hcl_events_config_form'] 
-      ]
+        'tags' => ['hcl_events_config_form'],
+      ],
     ];
-
     return $build;
   }
+
 }

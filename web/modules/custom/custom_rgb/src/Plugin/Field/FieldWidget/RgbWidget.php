@@ -2,11 +2,10 @@
 
 namespace Drupal\custom_rgb\Plugin\Field\FieldWidget;
 
-use Drupal\Core\Field\WidgetBase;
-use Drupal\Component\Utility\Color;
 use Drupal\Component\Serialization\Json;
-use Drupal\Core\Form\FormStateInterface;
+use Drupal\Component\Utility\Color;
 use Drupal\Core\Field\FieldItemListInterface;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Defines the 'custom_rgb_field' field widget.
@@ -20,16 +19,15 @@ use Drupal\Core\Field\FieldItemListInterface;
  *   }
  * )
  */
-class RgbWidget extends FieldWidgetBase
-{
+class RgbWidget extends FieldWidgetBase {
+
   /**
    * {@inheritdoc}
    */
-  public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state)
-  {
+  public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     // Check if the user has the 'administrator' role.
     if ($this->isAdminUser()) {
-      $values = Json::decode(isset($items[$delta]->rgb_value) ? $items[$delta]->rgb_value : '');
+      $values = Json::decode($items[$delta]->rgb_value ?? '');
 
       $element['rgb_value'] = [
         '#type' => 'container',
@@ -40,7 +38,7 @@ class RgbWidget extends FieldWidgetBase
       $element['rgb_value']['r'] = [
         '#type' => 'number',
         '#title' => $this->t('R'),
-        '#default_value' => isset($items[$delta]->rgb_value) ? $values['r'] : null,
+        '#default_value' => isset($items[$delta]->rgb_value) ? $values['r'] : NULL,
         '#min' => 0,
         '#max' => 255,
         '#step' => 1,
@@ -49,7 +47,7 @@ class RgbWidget extends FieldWidgetBase
       $element['rgb_value']['g'] = [
         '#type' => 'number',
         '#title' => $this->t('G'),
-        '#default_value' => isset($items[$delta]->rgb_value) ? $values['g'] : null,
+        '#default_value' => isset($items[$delta]->rgb_value) ? $values['g'] : NULL,
         '#min' => 0,
         '#max' => 255,
         '#step' => 1,
@@ -58,7 +56,7 @@ class RgbWidget extends FieldWidgetBase
       $element['rgb_value']['b'] = [
         '#type' => 'number',
         '#title' => $this->t('B'),
-        '#default_value' => isset($items[$delta]->rgb_value) ? $values['b'] : null,
+        '#default_value' => isset($items[$delta]->rgb_value) ? $values['b'] : NULL,
         '#min' => 0,
         '#max' => 255,
         '#step' => 1,
@@ -76,16 +74,17 @@ class RgbWidget extends FieldWidgetBase
   /**
    * {@inheritdoc}
    */
-  public function massageFormValues(array $values, array $form, FormStateInterface $form_state)
-  {
+  public function massageFormValues(array $values, array $form, FormStateInterface $form_state) {
     foreach ($values as $delta => $value) {
 
-      $rbg = [$value['rgb_value']['r'], $value['rgb_value']['g'], $value['rgb_value']['b'],];
+      $rbg = [
+        $value['rgb_value']['r'], $value['rgb_value']['g'], $value['rgb_value']['b'],
+      ];
       $hex = Color::rgbToHex($rbg);
 
       if ($value['rgb_value'] === '') {
         $values[$delta]['rgb_value'] = NULL;
-      } 
+      }
       elseif (!Color::validateHex($hex)) {
         $form_state->setErrorByName('rgb_value', 'Invalid rgb value');
       }
@@ -95,4 +94,5 @@ class RgbWidget extends FieldWidgetBase
     }
     return $values;
   }
+
 }

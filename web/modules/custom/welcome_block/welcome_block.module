@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * This file will redirect user to other page after successful login.
+ */
+
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 
@@ -8,18 +13,18 @@ use Drupal\Core\Url;
  */
 function welcome_block_form_alter(array &$form, FormStateInterface $form_state, string $form_id) {
   if ($form_id == 'user_login_form') {
-     $form['#submit'][] = 'welcome_block_submit_handler';
+    $form['#submit'][] = 'welcome_block_submit_handler';
   }
 }
 
 /**
- * This fucntion forward user to the custom welcome page.
- * 
+ * This function forward user to the custom welcome page.
+ *
  * @param array $form
- *   This array contains the form strcture.
- * @param FormStateInterface $form_state
+ *   This array contains the form metadata.
+ * @param Drupal\Core\Form\FormStateInterface $form_state
  *   This tracks the different state of the form.
- * 
+ *
  * @return void
  *   Instead of returning value this function redirect the page.
  */
@@ -41,4 +46,3 @@ function welcome_block_theme($existing, $type, $theme, $path) {
     ],
   ];
 }
-

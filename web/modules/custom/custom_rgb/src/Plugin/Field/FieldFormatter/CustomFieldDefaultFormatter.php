@@ -7,28 +7,25 @@ use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
 
 /**
- * Plugin implementation of the 'custom_rgb_field_default' formatter. This class
- * is used for fetching data and showing in the page.
+ * This class is used for fetching data and showing in the page.
  *
  * @FieldFormatter(
  *   id = "custom_rgb_field_default",
  *   label = @Translation("Default"),
  *   field_types = {"custom_rgb_field"}
  * )
- * 
+ *
  * @package Drupal\custom_rgb\Plugin\Field\FieldFormatter
  */
-class CustomFieldDefaultFormatter extends FormatterBase
-{
+class CustomFieldDefaultFormatter extends FormatterBase {
 
   /**
    * {@inheritdoc}
    */
-  public function viewElements(FieldItemListInterface $items, $langcode)
-  {
+  public function viewElements(FieldItemListInterface $items, $langcode) {
     $element = [];
 
-    // Getting all elements 
+    // Getting all elements.
     foreach ($items as $delta => $item) {
       if ($item->six_digit_hex_code) {
 
@@ -39,8 +36,6 @@ class CustomFieldDefaultFormatter extends FormatterBase
           '#content' => '#' . $color,
         ];
       }
-
-      $dummy2 = $item->rgb_value;
 
       if ($item->rgb_value) {
 
@@ -61,7 +56,7 @@ class CustomFieldDefaultFormatter extends FormatterBase
         ];
       }
     }
-
     return $element;
   }
+
 }

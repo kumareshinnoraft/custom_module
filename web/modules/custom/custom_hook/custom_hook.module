@@ -2,30 +2,28 @@
 
 /**
  * @file
- * Primary module hooks for custom_hook module. Depending on when I wanted to
- * triggered my hook I can mention it inside existing hooks.
+ * Tracks the count of entity, call the custom hook.
  */
 
-use Drupal\user\UserInterface;
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\custom_hook\Plugin\Block\ExampleBlock;
+use Drupal\user\UserInterface;
 
 /**
- * implements hook_user_login().
- * 
+ * Implements hook_user_login().
+ *
  * Whenever the user user will be logged in item_list will be called.
  */
-function custom_hook_user_login(UserInterface $account)
-{
+function custom_hook_user_login(UserInterface $account) {
   // Turning off my custom hook while using logging in.
-  // \Drupal::moduleHandler()->invokeAll('items_list', ExampleBlock::SHARED_DATA); 
+  \Drupal::moduleHandler()->invokeAll('items_list', ExampleBlock::SHARED_DATA);
 }
 
 /**
- * implements hook_node_view().
+ * Implements hook_node_view().
  */
-function custom_hook_node_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode)
-{
+function custom_hook_node_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
 
   // Getting the session of the current user.
   $session = \Drupal::request()->getSession();
@@ -39,7 +37,7 @@ function custom_hook_node_view(array &$build, EntityInterface $entity, EntityVie
     // If this is the first time they've viewed the page we need to start the
     // counter.
     $current_counts[$entity->id()] = 1;
-  } 
+  }
   else {
 
     // If they have already viewed this page just increment the existing
@@ -73,6 +71,6 @@ function custom_hook_node_view(array &$build, EntityInterface $entity, EntityVie
 /**
  * Implements hook_count_incremented().
  */
-function custom_module_count_incremented(int $count, object $entity) {
+function custom_hook_count_incremented(int $count, object $entity) {
   \Drupal::messenger()->addMessage($count);
 }

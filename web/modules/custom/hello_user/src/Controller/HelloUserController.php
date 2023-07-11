@@ -2,9 +2,9 @@
 
 namespace Drupal\hello_user\Controller;
 
-use Drupal\user\UserStorageInterface;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Session\AccountProxyInterface;
+use Drupal\user\UserStorageInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -17,23 +17,23 @@ class HelloUserController extends ControllerBase {
   /**
    * The current user.
    *
-   * @var AccountProxyInterface
+   * @var \Drupal\Core\Session\AccountProxyInterface
    */
   protected $currentUser;
 
   /**
    * The user storage.
    *
-   * @var UserStorageInterface
+   * @var \Drupal\user\UserStorageInterface
    */
   protected $userStorage;
 
   /**
    * This constructor initialize the services.
    *
-   * @param AccountProxyInterface
+   * @param \Drupal\Core\Session\AccountProxyInterface $current_user
    *   The current user.
-   * @param UserStorageInterface
+   * @param \Drupal\user\UserStorageInterface $user_storage
    *   The user storage.
    */
   public function __construct(AccountProxyInterface $current_user, UserStorageInterface $user_storage) {
@@ -53,7 +53,7 @@ class HelloUserController extends ControllerBase {
 
   /**
    * Greets user function is used to greet the user.
-   * 
+   *
    * @return array
    *   This array contains the title and markup message.
    */
@@ -63,11 +63,12 @@ class HelloUserController extends ControllerBase {
 
     // Returning the tags for getting new user name when it is changed.
     return [
-      '#title'  => $this->t('Welcome ' . $current_user->getDisplayName()),
+      '#title' => $this->t('Welcome @name', ['@name' => $current_user->getDisplayName()]),
       '#markup' => $this->t('This is the home page'),
       '#cache'  => [
-        'tags' => $this->currentUser()->getCacheTags()
-      ]
+        'tags' => $this->currentUser()->getCacheTags(),
+      ],
     ];
   }
+
 }

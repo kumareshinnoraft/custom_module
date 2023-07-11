@@ -3,11 +3,10 @@
 namespace Drupal\custom_rgb\Plugin\Field\FieldType;
 
 use Drupal\Component\Utility\Random;
-use Drupal\Core\Field\FieldItemBase;
-use Drupal\Core\TypedData\DataDefinition;
 use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\Field\FieldItemBase;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
-
+use Drupal\Core\TypedData\DataDefinition;
 
 /**
  * This class defines the 'custom_rgb_field' field type.
@@ -19,7 +18,7 @@ use Drupal\Core\Field\FieldStorageDefinitionInterface;
  *   default_widget = "color_picker_widget",
  *   default_formatter = "custom_rgb_field_default"
  * )
- * 
+ *
  * @package Drupal\custom_rgb\Plugin\Field\FieldType
  */
 class CustomFieldItem extends FieldItemBase {
@@ -107,4 +106,5 @@ class CustomFieldItem extends FieldItemBase {
 
     return $values;
   }
+
 }

@@ -18,14 +18,14 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class ExampleBlock extends BlockBase implements ContainerFactoryPluginInterface {
 
-    /**
+  /**
    * This object is the storage of the user entity.
    *
    * @var object
    */
   private $moduleHandler;
 
-    /**
+  /**
    * Constructs a Drupalist object.
    *
    * @param array $configuration
@@ -34,13 +34,13 @@ class ExampleBlock extends BlockBase implements ContainerFactoryPluginInterface 
    *   The plugin_id for the plugin instance.
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
-   * @param \Drupal\Core\Session\AccountInterface $currentUser
+   * @param \Drupal\Core\Extension\ModuleHandler $module_handler
    *   The current_user.
    */
   public function __construct(
-    array $configuration, 
-    $plugin_id, 
-    $plugin_definition, 
+    array $configuration,
+    $plugin_id,
+    $plugin_definition,
     ModuleHandler $module_handler
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
@@ -55,14 +55,14 @@ class ExampleBlock extends BlockBase implements ContainerFactoryPluginInterface 
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('module_handler') 
+      $container->get('module_handler')
     );
   }
 
   public const SHARED_DATA = [
     'name' => 'Kumaresh Baksi',
     'college' => 'BBIT',
-    'department' => 'CSE'
+    'department' => 'CSE',
   ];
 
   /**
@@ -71,11 +71,12 @@ class ExampleBlock extends BlockBase implements ContainerFactoryPluginInterface 
   public function build() {
 
     // Calling custom hook whenever this block will be present in a page this
-    // hook will be called. 
+    // hook will be called.
     $this->moduleHandler->invokeAll('items_list', [ExampleBlock::SHARED_DATA]);
 
     return [
-      '#title' => "This block calls a hook"
+      '#title' => "This block calls a hook",
     ];
   }
+
 }
