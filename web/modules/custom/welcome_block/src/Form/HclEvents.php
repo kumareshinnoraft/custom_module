@@ -8,32 +8,29 @@ use Drupal\Core\Form\FormStateInterface;
 
 /**
  * This class takes the input from the user.
- * 
+ *
  * @package Drupal\welcome_block\Form
  */
-class HclEvents extends ConfigFormBase
-{
+class HclEvents extends ConfigFormBase {
+
   /**
    * {@inheritdoc}
    */
-  public function getFormId()
-  {
+  public function getFormId() {
     return 'hcl_events_config_form';
   }
 
   /**
    * {@inheritdoc}
    */
-  protected function getEditableConfigNames()
-  {
+  protected function getEditableConfigNames() {
     return ['hcl_events_config_form.settings'];
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state)
-  {
+  public function buildForm(array $form, FormStateInterface $form_state) {
     $config = $this->config('hcl_events_config_form.settings');
 
     // First getting the the values from the tag_values.
@@ -52,7 +49,7 @@ class HclEvents extends ConfigFormBase
       '#type' => 'details',
       '#title' => "Tags",
       '#open' => TRUE,
-      '#description' => "The description of the field.",
+      '#description' => $this->t("The description of the field."),
     ];
 
     $form['tags']['tag_values'] = [
@@ -144,18 +141,17 @@ class HclEvents extends ConfigFormBase
 
   /**
    * This function add a new tag in the form.
-   * 
+   *
    * @param array $form
    *   This array contains form information's.
-   * @param FormStateInterface $form_state
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   This tracks the form states.
-   * 
+   *
    * @return void
    *   This function set the new fields in the array and rebuild the form.
    */
-  public function addOneTag(array &$form, FormStateInterface $form_state)
-  {
-    // Fetching the values from
+  public function addOneTag(array &$form, FormStateInterface $form_state) {
+    // Fetching the values from.
     $tag_values = $form_state->get('tag_values');
     $tag_values[] = [
       'group_name' => '',
@@ -169,19 +165,17 @@ class HclEvents extends ConfigFormBase
   }
 
   /**
-   * Remove a tag function identify the button data tag index and based on that
-   * update the value present in the array $tag_values.
-   * 
+   * Remove a tag from the array and rebuilding the form.
+   *
    * @param array $form
    *   This array contains form information's.
-   * @param FormStateInterface $form_state
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   This tracks the form states.
-   * 
+   *
    * @return void
    *   This function set the new fields in the array and rebuild the form.
    */
-  public function removeTag(array &$form, FormStateInterface $form_state)
-  {
+  public function removeTag(array &$form, FormStateInterface $form_state) {
     $triggering_element = $form_state->getTriggeringElement();
     $tag_index = $triggering_element['#attributes']['data-tag-index'];
 
@@ -194,27 +188,24 @@ class HclEvents extends ConfigFormBase
   }
 
   /**
-   * This function is called when form is getting rebuilt and we should not
-   * refresh the page.
-   * 
+   * This function is called when form is getting rebuilt.
+   *
    * @param array $form
    *   This array contains form information's.
-   * @param FormStateInterface $form_state
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   This tracks the form states.
-   * 
+   *
    * @return array
    *   This function returns the updated forms.
    */
-  public function updateTagCallback(array &$form, FormStateInterface $form_state)
-  {
+  public function updateTagCallback(array &$form, FormStateInterface $form_state) {
     return $form['tags'];
   }
 
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state)
-  {
+  public function submitForm(array &$form, FormStateInterface $form_state) {
     $config = $this->configFactory->getEditable('hcl_events_config_form.settings');
     $tag_values = $form_state->getValue('tag_values');
 
@@ -225,4 +216,5 @@ class HclEvents extends ConfigFormBase
 
     parent::submitForm($form, $form_state);
   }
+
 }

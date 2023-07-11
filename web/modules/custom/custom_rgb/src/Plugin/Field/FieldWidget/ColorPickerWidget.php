@@ -2,13 +2,9 @@
 
 namespace Drupal\custom_rgb\Plugin\Field\FieldWidget;
 
-use Drupal\Core\Field\WidgetBase;
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Field\FieldItemListInterface;
-use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Defines the 'custom_rgb_field' field widget.
@@ -21,11 +17,10 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *     "access" = "administer site configuration"
  *   }
  * )
- * 
+ *
  * @package Drupal\custom_rgb\Plugin\Field\FieldWidget
  */
-class ColorPickerWidget extends FieldWidgetBase implements ContainerFactoryPluginInterface
-{
+class ColorPickerWidget extends FieldWidgetBase implements ContainerFactoryPluginInterface {
   /**
    * This object is the storage of the user entity.
    *
@@ -36,15 +31,14 @@ class ColorPickerWidget extends FieldWidgetBase implements ContainerFactoryPlugi
   /**
    * {@inheritdoc}
    */
-  public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state)
-  {
+  public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     // Check if the user has the 'administrator' role.
     if ($this->isAdminUser()) {
 
       $element['color_picker'] = [
         '#type' => 'color',
         '#title' => $this->t('Color Picker'),
-        '#default_value' => isset($items[$delta]->color_picker) ? $items[$delta]->color_picker : null,
+        '#default_value' => $items[$delta]->color_picker ?? NULL,
         '#size' => 20,
       ];
 
@@ -60,8 +54,7 @@ class ColorPickerWidget extends FieldWidgetBase implements ContainerFactoryPlugi
   /**
    * {@inheritdoc}
    */
-  public function massageFormValues(array $values, array $form, FormStateInterface $form_state)
-  {
+  public function massageFormValues(array $values, array $form, FormStateInterface $form_state) {
     foreach ($values as $delta => $value) {
       if ($value['color_picker'] === '') {
         $values[$delta]['color_picker'] = NULL;
@@ -69,4 +62,5 @@ class ColorPickerWidget extends FieldWidgetBase implements ContainerFactoryPlugi
     }
     return $values;
   }
+
 }

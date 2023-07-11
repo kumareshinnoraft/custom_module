@@ -2,14 +2,12 @@
 
 namespace Drupal\welcome_block\Plugin\Block;
 
-use Drupal;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\Core\Session\AccountProxyInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Provides a custom block.
+ * Provides a custom block with a welcome message.
  *
  * @Block(
  *   id = "welcome_block",
@@ -22,7 +20,7 @@ class WelcomeBlock extends BlockBase implements ContainerFactoryPluginInterface 
   /**
    * The current user.
    *
-   * @var AccountProxyInterface
+   * @var \Drupal\Core\Session\AccountProxyInterface
    */
   protected $currentUser;
 
@@ -39,9 +37,9 @@ class WelcomeBlock extends BlockBase implements ContainerFactoryPluginInterface 
    *   The current_user.
    */
   public function __construct(
-    array $configuration, 
-    $plugin_id, 
-    $plugin_definition, 
+    array $configuration,
+    $plugin_id,
+    $plugin_definition,
     $currentUser,
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
@@ -61,15 +59,18 @@ class WelcomeBlock extends BlockBase implements ContainerFactoryPluginInterface 
   }
 
   /**
-   * This function will be used to make a welcome block which will be shown in
-   * a custom page.
+   * Showing welcome message in block.
+   *
+   * @return array
+   *   Returning render array.
    */
   public function build() {
-    
+
     // Returning user with a custom message. Rendering the array of roles and
     // showing last role of the user.
     return [
-      '#title' => 'Welcome to the custom block ' . $this->currentUser->getRoles()[sizeof($this->currentUser->getRoles()) - 1]
+      '#title' => $this->t('Welcome to the custom block @role', ['role' => $this->currentUser->getRoles()[count($this->currentUser->getRoles()) - 1]]),
     ];
   }
+
 }
