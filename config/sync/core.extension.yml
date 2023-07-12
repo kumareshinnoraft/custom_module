@@ -49,6 +49,7 @@ module:
   mysql: 0
   node: 0
   options: 0
+  override_function: 0
   page_cache: 0
   path: 0
   path_alias: 0
@@ -72,8 +73,9 @@ module:
   views_custom_cache_tag: 0
   views_custom_cache_tag_demo: 0
   views_ui: 0
-  welcome_block: 0
+  webprofiler: 0
   views: 10
+  welcome_block: 123
 theme:
   olivero: 0
   claro: 0

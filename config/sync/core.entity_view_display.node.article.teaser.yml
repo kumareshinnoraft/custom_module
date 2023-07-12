@@ -6,7 +6,6 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.article.body
     - field.field.node.article.comment
-    - field.field.node.article.field_custom_color_field
     - field.field.node.article.field_tags
     - node.type.article
   module:
@@ -40,5 +39,4 @@ content:
     region: content
 hidden:
   comment: true
-  field_custom_color_field: true
   field_tags: true

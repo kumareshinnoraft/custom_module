@@ -5,12 +5,10 @@ dependencies:
   config:
     - field.field.node.article.body
     - field.field.node.article.comment
-    - field.field.node.article.field_custom_color_field
     - field.field.node.article.field_tags
     - node.type.article
   module:
     - comment
-    - custom_rgb
     - path
     - text
 _core:
@@ -39,12 +37,6 @@ content:
   created:
     type: datetime_timestamp
     weight: 10
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_custom_color_field:
-    type: rgb_widget
-    weight: 121
     region: content
     settings: {  }
     third_party_settings: {  }
