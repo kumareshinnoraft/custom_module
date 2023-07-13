@@ -2,59 +2,52 @@
 
 namespace Drupal\config_form\Form;
 
+use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\CssCommand;
 use Drupal\Core\Ajax\HtmlCommand;
-use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\InvokeCommand;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Mail\MailManagerInterface;
-use Symfony\Component\HttpFoundation\Response;
+use Drupal\Core\Messenger\Messenger;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Config Form is for the administrator.
  *
- * @package Drupal\config_form\Form
+ * @package Drupal\Core\Messenger\Messenger
  */
-class ConfigForm extends ConfigFormBase
-{
-  /**
-   * This is the name of module and will be used from anywhere in the project
-   * by calling them directly through the class name.
-   */
-  public const MODULE_NAME = 'config_form';
+class ConfigForm extends ConfigFormBase {
 
   /**
-   * This is the key of mail this class is sending which is checked in the hook
-   * for further processing.
-   */
-  public const MAIL_KEY = 'config_form_mail';
-  /**
-   * Mail Manager is used for sending mail in a secure way.
+   * Messenger for showing messages.
    *
-   * @var MailManagerInterface
+   * @var \Drupal\Core\Messenger\Messenger
    */
-  private $mailManager;
+  protected $messenger;
 
   /**
-   * Constructor accepting the service of mail manager.
+   * This constructor initialize the services.
    *
-   * @param object $mail_manager_interface
-   *   Mail Manager Interface provides ability to send email.
+   * @param \Drupal\Core\Messenger\Messenger $messenger
+   *   Messenger services is getting initialized.
    */
-  public function __construct(MailManagerInterface $mail_manager_interface)
-  {
-    $this->mailManager = $mail_manager_interface;
+  public function __construct(Messenger $messenger) {
+    $this->messenger = $messenger;
   }
 
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container)
-  {
-    return new static($container->get('plugin.manager.mail'));
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('messenger'),
+    );
   }
+
+  /**
+   * Module name.
+   */
+  public const MODULE_NAME = 'config_form';
 
   /**
    * Creating a unique form id for the config form.
@@ -62,8 +55,7 @@ class ConfigForm extends ConfigFormBase
    * @return string
    *   Unique form id.
    */
-  public function getFormId()
-  {
+  public function getFormId() {
     return 'config_form_custom';
   }
 
@@ -73,8 +65,7 @@ class ConfigForm extends ConfigFormBase
    * @return array
    *   This array contains the config form.
    */
-  protected function getEditableConfigNames()
-  {
+  protected function getEditableConfigNames() {
     return ['config_form.settings'];
   }
 
@@ -83,14 +74,13 @@ class ConfigForm extends ConfigFormBase
    *
    * @param array $form
    *   This is the array which will contains fields with associative array.
-   * @param FormStateInterface $form_state
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   This variable uses the shows the different form states.
    *
    * @return array
    *   Form contains the array which having all fields.
    */
-  public function buildForm(array $form, FormStateInterface $form_state)
-  {
+  public function buildForm(array $form, FormStateInterface $form_state) {
     $form['full_name'] = [
       '#prefix' => '<div class="row"><div class="col-12 mb-4">',
       '#type' => 'textfield',
@@ -100,7 +90,7 @@ class ConfigForm extends ConfigFormBase
         'callback' => '::ajaxSubmit',
         'event' => 'submit',
       ],
-      '#suffix' => '<span id="full-name-error" class="error"></span></div></div>'
+      '#suffix' => '<span id="full-name-error" class="error"></span></div></div>',
     ];
 
     $form['phone_number'] = [
@@ -112,7 +102,7 @@ class ConfigForm extends ConfigFormBase
         'callback' => '::ajaxSubmit',
         'event' => 'submit',
       ],
-      '#suffix' => '<span id="phone-number-error" class="error"></span></div></div>'
+      '#suffix' => '<span id="phone-number-error" class="error"></span></div></div>',
     ];
 
     $form['email'] = [
@@ -124,7 +114,7 @@ class ConfigForm extends ConfigFormBase
         'callback' => '::ajaxSubmit',
         'event' => 'submit',
       ],
-      '#suffix' => '<span id="email-error" class="error"></span></div></div>'
+      '#suffix' => '<span id="email-error" class="error"></span></div></div>',
     ];
 
     $form['gender'] = [
@@ -141,7 +131,7 @@ class ConfigForm extends ConfigFormBase
         'event' => 'submit',
       ],
       '#required' => TRUE,
-      '#suffix' => '<span id="gender-error" class="error"></span></div></div>'
+      '#suffix' => '<span id="gender-error" class="error"></span></div></div>',
     ];
 
     $form['action']['submit'] = [
@@ -151,7 +141,7 @@ class ConfigForm extends ConfigFormBase
       '#ajax' => [
         'callback' => '::ajaxSubmit',
       ],
-      '#suffix' => '<span class="contact-form-result-message"></span></div>'
+      '#suffix' => '<span class="contact-form-result-message"></span></div>',
     ];
 
     return $form;
@@ -162,19 +152,17 @@ class ConfigForm extends ConfigFormBase
    *
    * @param array $form
    *   Form array containing the of the form elements.
-   * @param  mixed $form_state
+   * @param mixed $form_state
    *   Form state holds the values of input data.
-   * 
-   * @return Response
+   *
+   * @return \Symfony\Component\HttpFoundation\Response
    *   This response is the ajax response data.
    */
-  public function ajaxSubmit(array &$form, FormStateInterface $form_state)
-  {
+  public function ajaxSubmit(array &$form, FormStateInterface $form_state) {
     // Initiate response.
     $response = new AjaxResponse();
     $result = $this->validate($response, $form_state);
     $triggering_element = $form_state->getTriggeringElement();
-
 
     if ($result === TRUE && $triggering_element['#type'] === 'submit') {
 
@@ -191,10 +179,10 @@ class ConfigForm extends ConfigFormBase
       // Success message.
       $message = $this->t('Thanks! For Submitting The Form.');
       $response->addCommand(new HtmlCommand('.contact-form-result-message', $message));
-    } 
+    }
 
     // Deleting all messenger messages to avoid confusions.
-    \Drupal::messenger()->deleteAll();
+    $this->messenger->deleteAll();
 
     return $response;
   }
@@ -202,34 +190,34 @@ class ConfigForm extends ConfigFormBase
   /**
    * This function validates the form for ajax and normal calls.
    *
-   * @param FormStateInterface $form_state
-   *   This variable holds the form state.
-   * @param AjaxResponse $response
+   * @param \Drupal\Core\Ajax\AjaxResponse $response
    *   This ajax response is for altering the HTML fields in the form.
-   * 
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   This variable holds the form state.
+   *
    * @return mixed
    *   On successful validation this function returns TRUE, otherwise array.
    */
-  public function validate(AjaxResponse $response, FormStateInterface $form_state)
-  {
+  public function validate(AjaxResponse $response, FormStateInterface $form_state) {
     $phone_number = $form_state->getValue('phone_number');
     $email = $form_state->getValue('email');
-
     $flag = TRUE;
 
-    // Listing public domains
-    $public_domains = ['yahoo.com', 'gmail.com', 'outlook.com', '126', 'innoraft.com'];
+    // Listing public domains.
+    $public_domains = [
+      'yahoo.com', 'gmail.com', 'outlook.com', '126', 'innoraft.com',
+    ];
     $email_domain = substr(strrchr($email, "@"), 1);
 
     if (empty($form_state->getValue('full_name'))) {
       $flag = FALSE;
       $response->addCommand(new CssCommand('#full-name-error', ['color' => 'red']));
       $response->addCommand(new HtmlCommand('#full-name-error', $this->t('Please enter full name.')));
-    } 
+    }
     else {
       $response->addCommand(new HtmlCommand('#full-name-error', ''));
     }
-    
+
     if (!preg_match('/^[0-9]{10}$/', $phone_number)) {
       $flag = FALSE;
       $response->addCommand(new CssCommand('#phone-number-error', ['color' => 'red']));
@@ -238,26 +226,26 @@ class ConfigForm extends ConfigFormBase
     else {
       $response->addCommand(new HtmlCommand('#phone-number-error', ''));
     }
-    
+
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
       $flag = FALSE;
       $response->addCommand(new CssCommand('#email-error', ['color' => 'red']));
       $response->addCommand(new HtmlCommand('#email-error', $this->t('Invalid email format.')));
-    } 
+    }
     elseif (!in_array($email_domain, $public_domains)) {
       $flag = FALSE;
       $response->addCommand(new CssCommand('#email-error', ['color' => 'red']));
       $response->addCommand(new HtmlCommand('#email-error', $this->t('Only public email domains like Yahoo, Gmail, and Outlook are allowed.')));
-    } 
+    }
     elseif (substr($email, -strlen('.com')) !== '.com') {
       $flag = FALSE;
       $response->addCommand(new CssCommand('#email-error', ['color' => 'red']));
       $response->addCommand(new HtmlCommand('#email-error', $this->t('Email does not ends with .com')));
-    } 
+    }
     else {
       $response->addCommand(new HtmlCommand('#email-error', ''));
     }
-    
+
     if (empty($form_state->getValue('gender'))) {
       $flag = FALSE;
       $response->addCommand(new CssCommand('#gender-error', ['color' => 'red']));
@@ -273,8 +261,7 @@ class ConfigForm extends ConfigFormBase
   }
 
   /**
-   * This form simply sends the message to the user for successful validation
-   * checks.
+   * Simply sends the message to the user for successful validation checks.
    *
    * @param array $form
    *   This is the referenced array of form.
@@ -284,8 +271,8 @@ class ConfigForm extends ConfigFormBase
    * @return void
    *   This function returns the message using messenger.
    */
-  public function submitForm(array &$form, FormStateInterface $form_state)
-  {
+  public function submitForm(array &$form, FormStateInterface $form_state) {
     // As ajax is used in this form, submit form left as empty.
   }
+
 }
