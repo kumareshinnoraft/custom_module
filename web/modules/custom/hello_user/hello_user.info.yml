@@ -1,0 +1,5 @@
+name: hello_user
+type: module
+description: This module greets user.
+package: Custom Module
+core_version_requirement: ^9 || ^10

@@ -1,0 +1,10 @@
+welcome.welcome_page: 
+  path: '/welcome'
+  defaults:
+    _title: 'Welcome'
+    _controller: '\Drupal\welcome\Controller\WelcomeController::build'
+  requirements:
+    _permission: 'content_editor'
+
+    
+
