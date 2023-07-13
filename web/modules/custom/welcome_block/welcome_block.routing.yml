@@ -1,0 +1,16 @@
+custom_welcome_page.routing:
+  path: '/custom-welcome-page'
+  defaults:
+    _title: 'Welcome'
+    _controller: '\Drupal\welcome_block\Controller\WelcomeBlockController::build'
+  requirements:
+    _permission: 'access content'
+
+welcome_block.flagship_programmes:
+  path: '/admin/config/system/flagship-programmes'
+  defaults:
+    _title: 'Custom example'
+    _form: 'Drupal\welcome_block\Form\HclEvents'
+  requirements:
+    _permission: 'administer site configuration'
+
