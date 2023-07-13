@@ -1,0 +1,25 @@
+uuid: 6892c067-bcfa-4ff1-bb71-f1af439c4a6e
+langcode: en
+status: false
+dependencies:
+  module:
+    - custom_hook
+    - system
+  theme:
+    - olivero
+id: example
+theme: olivero
+region: sidebar
+weight: 0
+provider: null
+plugin: custom_hook_example
+settings:
+  id: custom_hook_example
+  label: Example
+  label_display: visible
+  provider: custom_hook
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "<front>\r\n/basic-page"
