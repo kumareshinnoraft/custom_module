@@ -1,0 +1,25 @@
+uuid: 37548260-f68f-4402-bef2-afe814a270f4
+langcode: en
+status: false
+dependencies:
+  module:
+    - hello_block
+    - system
+  theme:
+    - olivero
+id: helloblock
+theme: olivero
+region: content
+weight: -6
+provider: null
+plugin: hello_block
+settings:
+  id: hello_block
+  label: 'Hello block'
+  label_display: visible
+  provider: hello_block
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /welcome

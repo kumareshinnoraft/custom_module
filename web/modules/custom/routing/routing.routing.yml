@@ -1,0 +1,20 @@
+routing.permission:
+  path: '/routing'
+  defaults:
+    _title: 'Example'
+    _controller: '\Drupal\routing\Controller\RoutingController::build'
+  requirements:
+    # Only users having mentioned permissions will be able to view the page.
+    _permission: 'access the custom page'
+    _custom_access: '\Drupal\routing\Controller\CustomPageController::access'
+
+# This routing is for the 
+routing.campaign:
+  path: '/campaign/value/{num}'
+  defaults:
+    _title: 'Example'
+    _controller: '\Drupal\routing\Controller\RoutingController::parameter'
+  requirements:
+    _permission: 'access content'
+
+
