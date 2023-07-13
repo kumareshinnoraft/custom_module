@@ -70,8 +70,8 @@ web/modules/custom/welcome_block
 web/modules/custom/services
 web/modules/custom/config_form
 web/modules/custom/custom_hook
-web/modules/custom/custom_module
-web/modules/custom/hello_user
 web/modules/custom/routing
 web/modules/custom/welcome
-config
+web/modules/custom/ajax_form/
+web/modules/custom/cache_form/
+web/modules/custom/confirm_form/
