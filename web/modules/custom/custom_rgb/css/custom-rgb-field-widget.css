@@ -1,0 +1,9 @@
+.container-inline.custom-rgb-field-elements .form-item {
+  margin: 0 3px;
+}
+.container-inline.custom-rgb-field-elements label {
+  display: block;
+}
+.text-color {
+  font-weight: bold;
+}
