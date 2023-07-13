@@ -2,9 +2,10 @@
 
 namespace Drupal\custom_rgb\Plugin\Field\FieldWidget;
 
+use Drupal\Component\Serialization\Json;
+use Drupal\Component\Utility\Color;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 
 /**
  * Defines the 'custom_rgb_field' field widget.
@@ -20,25 +21,30 @@ use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
  *
  * @package Drupal\custom_rgb\Plugin\Field\FieldWidget
  */
-class ColorPickerWidget extends FieldWidgetBase implements ContainerFactoryPluginInterface {
-  /**
-   * This object is the storage of the user entity.
-   *
-   * @var object
-   */
-  private $currentUser;
+class ColorPickerWidget extends FieldWidgetBase {
 
   /**
    * {@inheritdoc}
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
-    // Check if the user has the 'administrator' role.
+
     if ($this->isAdminUser()) {
 
-      $element['color_picker'] = [
+      $color = $items[$delta]->color_code;
+
+      if (!Color::validateHex($items[$delta]->color_code)) {
+        $value = Json::decode($items[$delta]->color_code);
+        $color = $value['r'] . $value['g'] . $value['b'];
+      }
+
+      if (!strpos($color, '#') === 0) {
+        $color = '#' . $color;
+      }
+
+      $element['color_code'] = [
         '#type' => 'color',
         '#title' => $this->t('Color Picker'),
-        '#default_value' => $items[$delta]->color_picker ?? NULL,
+        '#default_value' => $color ?? NULL,
         '#size' => 20,
       ];
 
@@ -56,8 +62,8 @@ class ColorPickerWidget extends FieldWidgetBase implements ContainerFactoryPlugi
    */
   public function massageFormValues(array $values, array $form, FormStateInterface $form_state) {
     foreach ($values as $delta => $value) {
-      if ($value['color_picker'] === '') {
-        $values[$delta]['color_picker'] = NULL;
+      if ($value['color_code'] === '') {
+        $values[$delta]['color_code'] = NULL;
       }
     }
     return $values;

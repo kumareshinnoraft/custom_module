@@ -1,4 +1,9 @@
-<?php 
+<?php
+
+/**
+ * @file
+ * This hook will be used to add the custom theme.
+ */
 
 /**
  * Implements hook_theme().
@@ -9,6 +14,7 @@ function custom_rgb_theme($existing, $type, $theme, $path) {
       'template' => 'custom-rgb-color-picker',
       'variables' => [
         'content' => NULL,
+        'color' => NULL,
       ],
     ],
   ];

@@ -27,36 +27,45 @@ class RgbWidget extends FieldWidgetBase {
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     // Check if the user has the 'administrator' role.
     if ($this->isAdminUser()) {
-      $values = Json::decode($items[$delta]->rgb_value ?? '');
 
-      $element['rgb_value'] = [
+      if (!Color::validateHex($items[$delta]->color_code)) {
+        $values = Json::decode($items[$delta]->color_code ?? '');
+      }
+      else {
+        $values = Color::hexToRgb($items[$delta]->color_code);
+        $values['r'] = $values['red'];
+        $values['g'] = $values['green'];
+        $values['b'] = $values['blue'];
+      }
+
+      $element['color_code'] = [
         '#type' => 'container',
         '#attributes' => ['class' => ['rgb-color-wrapper']],
         '#size' => 2,
       ];
 
-      $element['rgb_value']['r'] = [
+      $element['color_code']['r'] = [
         '#type' => 'number',
         '#title' => $this->t('R'),
-        '#default_value' => isset($items[$delta]->rgb_value) ? $values['r'] : NULL,
+        '#default_value' => isset($items[$delta]->color_code) ? $values['r'] : NULL,
         '#min' => 0,
         '#max' => 255,
         '#step' => 1,
       ];
 
-      $element['rgb_value']['g'] = [
+      $element['color_code']['g'] = [
         '#type' => 'number',
         '#title' => $this->t('G'),
-        '#default_value' => isset($items[$delta]->rgb_value) ? $values['g'] : NULL,
+        '#default_value' => isset($items[$delta]->color_code) ? $values['g'] : NULL,
         '#min' => 0,
         '#max' => 255,
         '#step' => 1,
       ];
 
-      $element['rgb_value']['b'] = [
+      $element['color_code']['b'] = [
         '#type' => 'number',
         '#title' => $this->t('B'),
-        '#default_value' => isset($items[$delta]->rgb_value) ? $values['b'] : NULL,
+        '#default_value' => isset($items[$delta]->color_code) ? $values['b'] : NULL,
         '#min' => 0,
         '#max' => 255,
         '#step' => 1,
@@ -78,19 +87,19 @@ class RgbWidget extends FieldWidgetBase {
     foreach ($values as $delta => $value) {
 
       $rbg = [
-        $value['rgb_value']['r'], $value['rgb_value']['g'], $value['rgb_value']['b'],
+        $value['color_code']['r'], $value['color_code']['g'], $value['color_code']['b'],
       ];
       $hex = Color::rgbToHex($rbg);
 
-      if ($value['rgb_value'] === '') {
-        $values[$delta]['rgb_value'] = NULL;
+      if ($value['color_code'] === '') {
+        $values[$delta]['color_code'] = NULL;
       }
       elseif (!Color::validateHex($hex)) {
-        $form_state->setErrorByName('rgb_value', 'Invalid rgb value');
+        $form_state->setErrorByName('color_code', 'Invalid rgb value');
       }
 
       // Converting the values of RGB value to JSON for storing in the database.
-      $values[$delta]['rgb_value'] = Json::encode($value['rgb_value']);
+      $values[$delta]['color_code'] = Json::encode($value['color_code']);
     }
     return $values;
   }
