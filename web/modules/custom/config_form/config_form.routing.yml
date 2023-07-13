@@ -7,9 +7,10 @@ config_form.admin_api_form:
     _permission: 'administer'
 
 config_form.generate_login_link:
-  path: '/admin/config/system/generate-login-link'
+  path: '/generate-login-link'
   defaults:
     _title: 'Generate login link'
     _form: 'Drupal\config_form\Form\GenerateLoginLink'
   requirements:
-    _permission: 'administer'         
+    _permission: 'administer'
+  

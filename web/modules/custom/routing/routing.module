@@ -1,15 +1,17 @@
 <?php
 
+/**
+ * @file
+ * This file used to remove the custom access page.
+ */
 
 use Drupal\user\Entity\Role;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-
 /**
  * Implements hook_entity_access().
  */
-function routing_entity_access($entity, $operation, $account)
-{
+function routing_entity_access($entity, $operation, $account) {
   // Get the current route name.
   $current_route = \Drupal::routeMatch()->getRouteName();
 
