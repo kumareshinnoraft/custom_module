@@ -77,3 +77,14 @@ web/modules/custom/custom_field/
 web/modules/custom/conditional_form/
 web/modules/custom/custom_color_field/
 web/modules/custom/multistep_form/
+web/modules/custom/advertiser/
+web/modules/custom/book_detail/
+web/modules/custom/books/
+web/modules/custom/custom_bundle/
+web/modules/custom/custom_event/
+web/modules/custom/event_subscriber/
+web/modules/custom/most_simple/
+web/modules/custom/movie/
+web/modules/custom/override_function/
+web/modules/custom/practical/
+web/modules/custom/simple/
