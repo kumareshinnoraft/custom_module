@@ -3,6 +3,9 @@
 namespace Drupal\hello_user\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Session\AccountProxyInterface;
+use Drupal\user\UserStorageInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Returns responses for welcome routes.
@@ -58,12 +61,13 @@ class HelloUserController extends ControllerBase {
     // Getting the current user entity.
     $current_user = $this->userStorage->load($this->currentUser->id());
 
-    // Getting current logged user.
-    $current_user = Drupal::currentUser();
-
+    // Returning the tags for getting new user name when it is changed.
     return [
-      '#title'  => $this->t('Welcome ' . $current_user->getDisplayName()),
-      '#markup' => $this->t('This is the home page')
+      '#title' => $this->t('Welcome @name', ['@name' => $current_user->getDisplayName()]),
+      '#markup' => $this->t('This is the home page'),
+      '#cache'  => [
+        'tags' => $this->currentUser()->getCacheTags(),
+      ],
     ];
   }
 
