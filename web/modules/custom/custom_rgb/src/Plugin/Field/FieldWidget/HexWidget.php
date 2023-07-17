@@ -2,6 +2,7 @@
 
 namespace Drupal\custom_rgb\Plugin\Field\FieldWidget;
 
+use Drupal\Component\Serialization\Json;
 use Drupal\Component\Utility\Color;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
@@ -29,10 +30,17 @@ class HexWidget extends FieldWidgetBase {
     // Check if the user has the 'administrator' role.
     if ($this->isAdminUser()) {
 
-      $element['six_digit_hex_code'] = [
+      $color = $items[$delta]->color_code;
+
+      if (!Color::validateHex($items[$delta]->color_code) &&  $color !== NULL) {
+        $value = Json::decode($items[$delta]->color_code);
+        $color = $value['r'] . $value['g'] . $value['b'];
+      }
+
+      $element['color_code'] = [
         '#type' => 'textfield',
         '#title' => $this->t('6-digit hex code'),
-        '#default_value' => $items[$delta]->six_digit_hex_code ?? NULL,
+        '#default_value' => $color ?? NULL,
         '#size' => 6,
         '#max' => 5,
         '#step' => 1,
@@ -52,11 +60,11 @@ class HexWidget extends FieldWidgetBase {
    */
   public function massageFormValues(array $values, array $form, FormStateInterface $form_state) {
     foreach ($values as $delta => $value) {
-      if ($value['six_digit_hex_code'] === '') {
-        $values[$delta]['six_digit_hex_code'] = NULL;
+      if ($value['color_code'] === '') {
+        $values[$delta]['color_code'] = NULL;
       }
-      elseif (!Color::validateHex($value['six_digit_hex_code'])) {
-        $form_state->setErrorByName('six_digit_hex_code', 'Invalid hex value');
+      elseif (!Color::validateHex($value['color_code'])) {
+        $form_state->setErrorByName('color_code', 'Invalid hex value');
       }
     }
     return $values;
