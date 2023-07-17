@@ -16,7 +16,7 @@ use Drupal\Core\TypedData\DataDefinition;
  *   label = @Translation("Custom Field"),
  *   category = @Translation("General"),
  *   default_widget = "color_picker_widget",
- *   default_formatter = "custom_rgb_field_default"
+ *   default_formatter = "colored_text_formatter"
  * )
  *
  * @package Drupal\custom_rgb\Plugin\Field\FieldType
