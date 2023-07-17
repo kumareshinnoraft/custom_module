@@ -1,2 +1,5 @@
-<span class="text-color">{{ content }}</span>
-<span class="text-color" style="background-color: {{ content }}">{{ content }}</span>
+{% if color is defined %}
+  <span class="text-color" style="background-color: {{ color }}">{{ content }}</span>
+{% else %}
+  <span class="text-color">{{ content }}</span>
+{% endif %}
