@@ -34,7 +34,10 @@ class ColorPickerWidget extends FieldWidgetBase {
 
       if (!Color::validateHex($items[$delta]->color_code)) {
         $value = Json::decode($items[$delta]->color_code);
-        $color = $value['r'] . $value['g'] . $value['b'];
+        $rgb_value['red'] = $value['r'];
+        $rgb_value['green'] = $value['g'];
+        $rgb_value['blue'] = $value['b'];
+        $color = Color::rgbToHex($rgb_value);
       }
 
       if (!strpos($color, '#') === 0) {
