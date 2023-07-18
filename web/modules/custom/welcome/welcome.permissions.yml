@@ -1,0 +1,5 @@
+administer welcome configuration:
+  title: 'Administer welcome configuration'
+  description: 'Optional description.'
+  restrict access: true
+      
