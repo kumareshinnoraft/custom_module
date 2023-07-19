@@ -32,7 +32,7 @@ class HexWidget extends FieldWidgetBase {
 
       $color = $items[$delta]->color_code;
 
-      if (!Color::validateHex($items[$delta]->color_code)) {
+      if (!Color::validateHex($items[$delta]->color_code) &&  $color !== NULL) {
         $value = Json::decode($items[$delta]->color_code);
         $color = $value['r'] . $value['g'] . $value['b'];
       }

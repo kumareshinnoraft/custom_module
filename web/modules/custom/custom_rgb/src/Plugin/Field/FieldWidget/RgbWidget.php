@@ -85,22 +85,24 @@ class RgbWidget extends FieldWidgetBase {
    */
   public function massageFormValues(array $values, array $form, FormStateInterface $form_state) {
     foreach ($values as $delta => $value) {
-
-      $rbg = [
-        $value['color_code']['r'], $value['color_code']['g'], $value['color_code']['b'],
+      $rgb = [
+        $value['color_code']['r'],
+        $value['color_code']['g'],
+        $value['color_code']['b'],
       ];
-      $hex = Color::rgbToHex($rbg);
 
-      if ($value['color_code'] === '') {
+      if ($value['color_code']['r'] === '' && $value['color_code']['g'] === '' && $value['color_code']['b'] === '') {
         $values[$delta]['color_code'] = NULL;
       }
-      elseif (!Color::validateHex($hex)) {
-        $form_state->setErrorByName('color_code', 'Invalid rgb value');
+      elseif (!Color::validateHex(Color::rgbToHex($rgb))) {
+        $form_state->setErrorByName($this->fieldDefinition->getName(), $this->t('Invalid RGB value for field @field', ['@field' => $this->fieldDefinition->getLabel()]));
       }
-
-      // Converting the values of RGB value to JSON for storing in the database.
-      $values[$delta]['color_code'] = Json::encode($value['color_code']);
+      else {
+        // Convert the values of RGB value to JSON for storing in the database.
+        $values[$delta]['color_code'] = Json::encode($value['color_code']);
+      }
     }
+
     return $values;
   }
 
