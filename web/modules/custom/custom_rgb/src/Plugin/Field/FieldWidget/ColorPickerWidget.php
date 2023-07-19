@@ -30,6 +30,7 @@ class ColorPickerWidget extends FieldWidgetBase {
 
     if ($this->isAdminUser()) {
 
+<<<<<<< HEAD
       $color = $items[$delta]->color_code;
 
       if (!Color::validateHex($items[$delta]->color_code)) {
@@ -42,6 +43,23 @@ class ColorPickerWidget extends FieldWidgetBase {
 
       if (!strpos($color, '#') === 0) {
         $color = '#' . $color;
+=======
+      $color = NULL;
+
+      if (!empty($items[$delta]->color_code)) {
+        $color = $items[$delta]->color_code;
+
+        if (!Color::validateHex($items[$delta]->color_code)) {
+          $value = Json::decode($items[$delta]->color_code);
+          $rgb_value['red'] = $value['r'];
+          $rgb_value['green'] = $value['g'];
+          $rgb_value['blue'] = $value['b'];
+          $color = Color::rgbToHex($rgb_value);
+        }
+        if (strpos($color, '#') === 0) {
+          $color = '#' . $color;
+        }
+>>>>>>> FT2023-327
       }
 
       $element['color_code'] = [
