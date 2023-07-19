@@ -19,8 +19,6 @@ function custom_rgb_theme($existing, $type, $theme, $path) {
     ],
   ];
 }
-<<<<<<< HEAD
-=======
 
 /**
  * Implements hook_multiple_field_remove_button_field_types_alter().
@@ -28,4 +26,3 @@ function custom_rgb_theme($existing, $type, $theme, $path) {
 function custom_rgb_multiple_field_remove_button_field_types_alter(array &$fieldTypes): void {
   $fieldTypes[] = "custom_rgb_field";
 }
->>>>>>> FT2023-327
