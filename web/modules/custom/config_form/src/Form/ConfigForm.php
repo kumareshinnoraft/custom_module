@@ -81,10 +81,14 @@ class ConfigForm extends ConfigFormBase {
    *   Form contains the array which having all fields.
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+
+    $config = $this->config('config_form.settings');
+
     $form['full_name'] = [
       '#prefix' => '<div class="row"><div class="col-12 mb-4">',
       '#type' => 'textfield',
       '#title' => $this->t('Full Name'),
+      '#default_value' => $config->get('full_name') ?? '',
       '#required' => TRUE,
       '#ajax' => [
         'callback' => '::ajaxSubmit',
@@ -98,6 +102,7 @@ class ConfigForm extends ConfigFormBase {
       '#type' => 'tel',
       '#title' => $this->t('Phone Number'),
       '#required' => TRUE,
+      '#default_value' => $config->get('phone_number') ?? '',
       '#ajax' => [
         'callback' => '::ajaxSubmit',
         'event' => 'submit',
@@ -110,6 +115,7 @@ class ConfigForm extends ConfigFormBase {
       '#type' => 'email',
       '#title' => $this->t('Email'),
       '#required' => TRUE,
+      '#default_value' => $config->get('email') ?? '',
       '#ajax' => [
         'callback' => '::ajaxSubmit',
         'event' => 'submit',
@@ -121,6 +127,7 @@ class ConfigForm extends ConfigFormBase {
       '#prefix' => '<div class="row"><div class="col-12 mb-4">',
       '#type' => 'radios',
       '#title' => $this->t('Gender'),
+      '#default_value' => $config->get('gender') ?? '',
       '#options' => [
         'male' => $this->t('Male'),
         'female' => $this->t('Female'),
