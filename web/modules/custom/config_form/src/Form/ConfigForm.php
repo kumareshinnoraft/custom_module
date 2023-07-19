@@ -21,7 +21,7 @@ class ConfigForm extends ConfigFormBase {
   /**
    * Messenger for showing messages.
    *
-   * @var \Drupal\Core\Session\AccountProxyInterface
+   * @var \Drupal\Core\Messenger\Messenger
    */
   protected $messenger;
 

@@ -73,6 +73,7 @@ web/modules/custom/ajax_form/
 web/modules/custom/confirm_form/
 web/modules/custom/cache_form/
 web/modules/custom/custom_form_example/
+
 web/modules/custom/custom_field/
 web/modules/custom/conditional_form/
 web/modules/custom/custom_color_field/
@@ -88,3 +89,15 @@ web/modules/custom/movie/
 web/modules/custom/override_function/
 web/modules/custom/practical/
 web/modules/custom/simple/
+web/modules/custom/event_subscriber/
+web/modules/custom/custom_event/
+web/modules/custom/advertiser/
+web/modules/custom/movie/
+web/modules/custom/books/
+web/modules/custom/custom_bundle/
+web/modules/custom/custom_blog/
+web/modules/custom/book_detail/
+web/modules/custom/override_function/
+web/modules/custom/simple/
+web/modules/custom/most_simple/
+web/modules/custom/practical/
