@@ -1,3 +1,4 @@
+uuid: 9fe963da-bc8b-4558-8096-637d79898918
 langcode: en
 status: true
 dependencies:
@@ -6,6 +7,8 @@ dependencies:
     - node.type.movie
   module:
     - text
+_core:
+  default_config_hash: Tf-r3R89Jjy5x8njTjlazax9XnteCW17s-ZMKNMSECA
 id: node.movie.body
 field_name: body
 entity_type: node
@@ -19,4 +22,5 @@ default_value_callback: ''
 settings:
   display_summary: true
   required_summary: false
+  allowed_formats: {  }
 field_type: text_with_summary

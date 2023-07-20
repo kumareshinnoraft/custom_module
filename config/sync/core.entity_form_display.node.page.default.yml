@@ -4,12 +4,8 @@ status: true
 dependencies:
   config:
     - field.field.node.page.body
-    - field.field.node.page.field_color
-    - field.field.node.page.field_new_ccolor_
-    - field.field.node.page.field_rgb
     - node.type.page
   module:
-    - custom_rgb
     - path
 id: node.page.default
 targetEntityType: node
@@ -19,12 +15,6 @@ content:
   created:
     type: datetime_timestamp
     weight: 10
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_new_ccolor_:
-    type: color_picker_widget
-    weight: 121
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -75,5 +65,3 @@ content:
     third_party_settings: {  }
 hidden:
   body: true
-  field_color: true
-  field_rgb: true

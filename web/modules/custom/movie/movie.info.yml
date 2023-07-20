@@ -1,0 +1,6 @@
+name: Movie
+type: module
+description: This is a config entity movie.
+package: Custom Module
+core: 8.x
+core_version_requirement: ^10 || ^9

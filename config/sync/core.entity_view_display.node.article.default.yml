@@ -6,10 +6,13 @@ dependencies:
     - core.entity_view_display.comment.comment.default
     - field.field.node.article.body
     - field.field.node.article.comment
+    - field.field.node.article.field_body
+    - field.field.node.article.field_color
     - field.field.node.article.field_tags
     - node.type.article
   module:
     - comment
+    - custom_rgb
     - text
     - user
 _core:
@@ -34,6 +37,20 @@ content:
       pager_id: 0
     third_party_settings: {  }
     weight: 110
+    region: content
+  field_body:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 112
+    region: content
+  field_color:
+    type: non_colored_text_formatter
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 111
     region: content
   field_tags:
     type: entity_reference_label

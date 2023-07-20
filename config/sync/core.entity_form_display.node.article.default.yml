@@ -5,10 +5,13 @@ dependencies:
   config:
     - field.field.node.article.body
     - field.field.node.article.comment
+    - field.field.node.article.field_body
+    - field.field.node.article.field_color
     - field.field.node.article.field_tags
     - node.type.article
   module:
     - comment
+    - custom_rgb
     - path
     - text
 _core:
@@ -37,6 +40,22 @@ content:
   created:
     type: datetime_timestamp
     weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_body:
+    type: text_textarea_with_summary
+    weight: 122
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  field_color:
+    type: color_picker_widget
+    weight: 121
     region: content
     settings: {  }
     third_party_settings: {  }

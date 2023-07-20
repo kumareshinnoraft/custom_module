@@ -1,4 +1,4 @@
-uuid: 1df1d6e9-a9c6-403f-9f85-d8eaf2b544ed
+uuid: 965e04f5-632d-47ac-b91d-d0e13607c499
 langcode: en
 status: true
 dependencies:
@@ -12,7 +12,7 @@ type: custom_rgb_field
 settings: {  }
 module: custom_rgb
 locked: false
-cardinality: 1
+cardinality: -1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false

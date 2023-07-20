@@ -4,25 +4,14 @@ status: true
 dependencies:
   config:
     - field.field.node.page.body
-    - field.field.node.page.field_color
-    - field.field.node.page.field_new_ccolor_
-    - field.field.node.page.field_rgb
     - node.type.page
   module:
-    - custom_rgb
     - user
 id: node.page.default
 targetEntityType: node
 bundle: page
 mode: default
 content:
-  field_new_ccolor_:
-    type: custom_rgb_field_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 101
-    region: content
   links:
     settings: {  }
     third_party_settings: {  }
@@ -30,5 +19,3 @@ content:
     region: content
 hidden:
   body: true
-  field_color: true
-  field_rgb: true
