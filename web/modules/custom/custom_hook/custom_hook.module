@@ -72,5 +72,5 @@ function custom_hook_node_view(array &$build, EntityInterface $entity, EntityVie
  * Implements hook_count_incremented().
  */
 function custom_hook_count_incremented(int $count, object $entity) {
-  \Drupal::messenger()->addMessage($count);
+  // \Drupal::messenger()->addMessage($count);
 }

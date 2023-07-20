@@ -1,16 +1,16 @@
-uuid: 1df1d6e9-a9c6-403f-9f85-d8eaf2b544ed
+uuid: d4659216-31c6-4cdf-987b-f18e1cf0cb92
 langcode: en
 status: true
 dependencies:
   module:
-    - custom_rgb
     - node
-id: node.field_color
-field_name: field_color
+    - text
+id: node.field_body
+field_name: field_body
 entity_type: node
-type: custom_rgb_field
+type: text_with_summary
 settings: {  }
-module: custom_rgb
+module: text
 locked: false
 cardinality: 1
 translatable: true
