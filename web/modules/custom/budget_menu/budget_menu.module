@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for budget_menu module.
+ */
+
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_entity_view().
+ */
+function budget_menu_entity_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  if ($entity->getEntityTypeId() === 'node' && $entity->bundle() === 'movie') {
+
+    // Get the budget amount from the config form.
+    $config = \Drupal::config('budget_menu.settings');
+    $budget_amount = $config->get('budget_friendly_amount');
+
+    // Get the budget amount from the node field.
+    $node_budget_amount = $entity->get('field_price')->value;
+
+    // Compare the budget amounts and set the corresponding text.
+    if ($budget_amount > $node_budget_amount) {
+      $build['budget_status'] = [
+        '#markup' => 'The movie is under budget',
+      ];
+    }
+    elseif ($budget_amount < $node_budget_amount) {
+      $build['budget_status'] = [
+        '#markup' => 'The movie is over budget',
+      ];
+    }
+    else {
+      $build['budget_status'] = [
+        '#markup' => 'The movie is within budget',
+      ];
+    }
+  }
+
+}

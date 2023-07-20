@@ -1,0 +1,14 @@
+_core:
+  default_config_hash: VDJxTZtQR21qB4lvOq8zszJZLvLKrSPQpdn2E3T71Ww
+langcode: en
+uuid: c9a112be-f64e-4769-88b2-6bb3411206da
+name: 'Custom Module'
+mail: baksikumaresh@gmail.com
+slogan: ''
+page:
+  403: ''
+  404: ''
+  front: /welcome
+admin_compact_mode: false
+weight_select_max: 100
+default_langcode: en

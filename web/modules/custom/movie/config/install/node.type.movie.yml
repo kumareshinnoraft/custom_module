@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies: {  }
+name: Movie
+type: movie
+description: 'Use <em>movie</em> for creating a new node as movie.'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: true

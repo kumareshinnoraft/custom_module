@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * This file used to remove the custom access page.
+ */
+
+use Drupal\user\Entity\Role;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
+/**
+ * Implements hook_entity_access().
+ */
+function routing_entity_access($entity, $operation, $account) {
+  // Get the current route name.
+  $current_route = \Drupal::routeMatch()->getRouteName();
+
+  // Check if the current route matches the desired page route.
+  if ($current_route === 'routing.permission') {
+    // Check if the user has the "content_editor" role.
+    if ($account->hasRole('content_editor')) {
+
+      $role = Role::load('content_editor');
+      if ($role) {
+        // Revoke the "access the custom page" permission from the user's role.
+        $role->revokePermission('access the custom page');
+        $role->save();
+
+        // Reloading the same page after removing permissions.
+        $response = new RedirectResponse(\Drupal::request()->getRequestUri());
+        $response->send();
+      }
+    }
+  }
+}

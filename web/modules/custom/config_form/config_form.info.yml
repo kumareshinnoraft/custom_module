@@ -1,0 +1,5 @@
+name: Config Form
+description: This is our first config form.
+core_version_requirement: 10.x || 9.x
+type: module
+package: Custom Modules
