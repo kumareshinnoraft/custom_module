@@ -1,31 +1,31 @@
-entity.movie.collection:
-  path: '/admin/structure/movie'
+entity.award_movie.collection:
+  path: '/admin/structure/award_movie'
   defaults:
-    _entity_list: 'movie'
-    _title: 'Movie configuration'
+    _entity_list: 'award_movie'
+    _title: 'AwardMovie configuration'
   requirements:
-    _permission: 'administer movie'
+    _permission: 'administer award_movie'
 
-entity.movie.add_form:
-  path: '/admin/structure/movie/add'
+entity.award_movie.add_form:
+  path: '/admin/structure/award_movie/add'
   defaults:
-    _entity_form: 'movie.add'
-    _title: 'Add a movie'
+    _entity_form: 'award_movie.add'
+    _title: 'Add an award_movie'
   requirements:
-    _permission: 'administer movie'
+    _permission: 'administer award_movie'
 
-entity.movie.edit_form:
-  path: '/admin/structure/movie/{movie}'
+entity.award_movie.edit_form:
+  path: '/admin/structure/award_movie/{award_movie}'
   defaults:
-    _entity_form: 'movie.edit'
-    _title: 'Edit a movie'
+    _entity_form: 'award_movie.edit'
+    _title: 'Edit an award_movie'
   requirements:
-    _permission: 'administer movie'
+    _permission: 'administer award_movie'
 
-entity.movie.delete_form:
-  path: '/admin/structure/movie/{movie}/delete'
+entity.award_movie.delete_form:
+  path: '/admin/structure/award_movie/{award_movie}/delete'
   defaults:
-    _entity_form: 'movie.delete'
-    _title: 'Delete a movie'
+    _entity_form: 'award_movie.delete'
+    _title: 'Delete an award_movie'
   requirements:
-    _permission: 'administer movie'
+    _permission: 'administer award_movie'

@@ -12,3 +12,18 @@ movie.movie.*:
       type: string
     description:
       type: string
+
+movie.awardmovie.*:
+  type: config_entity
+  label: AwardMovie
+  mapping:
+    id:
+      type: string
+      label: ID
+    label:
+      type: label
+      label: Label
+    uuid:
+      type: string
+    description:
+      type: string
