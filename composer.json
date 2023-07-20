@@ -27,6 +27,7 @@
         "drupal/core-recommended": "^10.0",
         "drupal/devel": "^5.1",
         "drupal/examples": "^4.0",
+        "drupal/fontawesome": "^2.26",
         "drupal/google_map_field": "^2.0",
         "drupal/multiple_fields_remove_button": "^2.2",
         "drupal/poll": "^1.6",

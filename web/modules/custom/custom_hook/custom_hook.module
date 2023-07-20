@@ -17,7 +17,7 @@ use Drupal\user\UserInterface;
  */
 function custom_hook_user_login(UserInterface $account) {
   // Turning off my custom hook while using logging in.
-  \Drupal::moduleHandler()->invokeAll('items_list', ExampleBlock::SHARED_DATA);
+  // \Drupal::moduleHandler()->invokeAll('items_list', ExampleBlock::SHARED_DATA);
 }
 
 /**

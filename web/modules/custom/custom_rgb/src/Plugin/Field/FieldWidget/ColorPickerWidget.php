@@ -42,7 +42,7 @@ class ColorPickerWidget extends FieldWidgetBase {
           $rgb_value['blue'] = $value['b'];
           $color = Color::rgbToHex($rgb_value);
         }
-        if (strpos($color, '#') === 0) {
+        if (strpos($color, '#') !== 0) {
           $color = '#' . $color;
         }
       }

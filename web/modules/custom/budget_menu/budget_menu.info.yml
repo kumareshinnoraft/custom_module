@@ -1,0 +1,5 @@
+name: budget_menu
+type: module
+description: This is a budget menu for movie.
+package: Custom Moduel
+core_version_requirement: ^9 || ^10

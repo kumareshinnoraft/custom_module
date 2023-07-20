@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the budget_menu module.
+ */
+
+use Drupal\user\Entity\Role;
+
+/**
+ * Implements hook_install().
+ */
+function budget_menu_install() {
+  $role_object = Role::load('content_editor');
+  $role_object->grantPermission('administer budget_menu configuration');
+  $role_object->save();
+}
