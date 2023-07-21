@@ -23,20 +23,33 @@ function budget_menu_entity_view(array &$build, EntityInterface $entity, EntityV
 
     // Compare the budget amounts and set the corresponding text.
     if ($budget_amount > $node_budget_amount) {
-      $build['budget_status'] = [
-        '#markup' => 'The movie is under budget',
-      ];
+      $status = 'The movie is under budget';
+      $color = 'yellow';
     }
     elseif ($budget_amount < $node_budget_amount) {
-      $build['budget_status'] = [
-        '#markup' => 'The movie is over budget',
-      ];
+      $status = 'The movie is over budget';
+      $color = 'red';
     }
     else {
-      $build['budget_status'] = [
-        '#markup' => 'The movie is within budget',
-      ];
+      $status = 'The movie is within budget';
+      $color = 'green';
     }
+
+    $build['budget_status'] = [
+      '#type' => 'html_tag',
+      '#tag' => 'p',
+      '#value' => $status,
+      '#attributes' => [
+        'style' => 'background-color:' . $color . ';',
+      ],
+    ];
   }
 
+}
+
+/**
+ * Implements hook_toolbar_alter().
+ */
+function budget_menu_toolbar_alter(&$items) {
+  $items['administration']['#attached']['library'][] = 'budget_menu/budget_menu';
 }
