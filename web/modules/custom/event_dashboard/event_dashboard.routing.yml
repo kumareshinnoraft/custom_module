@@ -1,0 +1,8 @@
+event_dashboard.example:
+  path: '/admin/event/dashboard'
+  defaults:
+    _title: 'Event Dashboard'
+    _controller: '\Drupal\event_dashboard\Controller\EventDashboardController::build'
+  requirements:
+    _permission: 'access content'
+

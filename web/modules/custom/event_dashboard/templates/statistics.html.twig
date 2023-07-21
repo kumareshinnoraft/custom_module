@@ -1,0 +1,75 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display something.
+ *
+ * Available variables:
+ * - yearly_counts: An array containing the yearly event counts.
+ * - quarterly_counts: An array containing the quarterly event counts.
+ * - type_counts: An array containing the event type counts.
+ *
+ * @ingroup themeable
+ */
+#}
+<div class="event-dashboard-container">
+  <div class="event-dashboard-column">
+    <h2>Yearly Event Counts</h2>
+    <table class="event-dashboard-table">
+      <thead>
+        <tr>
+          <th>Year</th>
+          <th>Event Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in yearly_counts %}
+          <tr>
+            <td>{{ row.0 }}</td>
+            <td>{{ row.1 }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="event-dashboard-column">
+    <h2>Quarterly Event Counts</h2>
+    <table class="event-dashboard-table">
+      <thead>
+        <tr>
+          <th>Year</th>
+          <th>Quarter</th>
+          <th>Event Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in quarterly_counts %}
+          <tr>
+            <td>{{ row.0 }}</td>
+            <td>{{ row.1 }}</td>
+            <td>{{ row.2 }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="event-dashboard-column">
+    <h2>Event Type Counts</h2>
+    <table class="event-dashboard-table">
+      <thead>
+        <tr>
+          <th>Event Type</th>
+          <th>Event Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in type_counts %}
+          <tr>
+            <td>{{ row.0 }}</td>
+            <td>{{ row.1 }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+</div>

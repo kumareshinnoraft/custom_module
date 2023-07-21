@@ -10,6 +10,7 @@ module:
   blog: 0
   books: 0
   breakpoint: 0
+  budget_menu: 0
   cache_form: 0
   campaign: 0
   ckeditor5: 0
@@ -33,12 +34,14 @@ module:
   dynamic_page_cache: 0
   editor: 0
   employee: 0
+  event_dashboard: 0
   event_subscriber: 0
   examples: 0
   field: 0
   field_ui: 0
   file: 0
   filter: 0
+  fontawesome: 0
   google_map_field: 0
   hello_block: 0
   hello_user: 0
@@ -85,4 +88,5 @@ module:
 theme:
   olivero: 0
   claro: 0
+  budget_menu_theme: 0
 profile: standard
