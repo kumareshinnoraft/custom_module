@@ -225,7 +225,7 @@ class ConfigForm extends ConfigFormBase {
       $response->addCommand(new HtmlCommand('#full-name-error', ''));
     }
 
-    if (!preg_match('/^[0-9]{10}$/', $phone_number)) {
+    if (!preg_match('/^[0-9]{10}$/', $phone_number) && !preg_match('/^\(\d{3}\) \d{3}-\d{4}$/', $phone_number)) {
       $flag = FALSE;
       $response->addCommand(new CssCommand('#phone-number-error', ['color' => 'red']));
       $response->addCommand(new HtmlCommand('#phone-number-error', $this->t('Invalid phone number. Please enter a 10-digit Indian number.')));
