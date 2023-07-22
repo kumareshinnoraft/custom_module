@@ -1,0 +1,43 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the custom_theme theme.
+ */
+
+/**
+ * Implements template_preprocess_page() for custom_page.html.twig.
+ */
+function custom_theme_preprocess_page(&$variables) {
+  // Check if the current page is your custom page.
+  $route_name = \Drupal::routeMatch()->getRouteName();
+
+  if ($route_name == 'custom_page.example') {
+    // Load the webform.
+    $webform = \Drupal::entityTypeManager()->getStorage('webform')->load('test');
+    // Pass the webform to the template.
+    $variables['webform'] = \Drupal::entityTypeManager()
+      ->getViewBuilder('webform')
+      ->view($webform);
+
+    // Load the paragraph.
+    $paragraph_id = 1;
+    $paragraph = \Drupal::entityTypeManager()->getStorage('paragraph')->load($paragraph_id);
+    // Pass the paragraph to the template.
+    $variables['paragraph'] = \Drupal::entityTypeManager()
+      ->getViewBuilder('paragraph')
+      ->view($paragraph);
+  }
+}
+
+/**
+ * Implements template_preprocess_html() for adding class to body tag.
+ */
+function custom_theme_preprocess_html(&$variables) {
+  // Check if the current node is of Movies content type.
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    if ($node->bundle() == 'movie') {
+      $variables['attributes']['class'][] = 'movies-content-type';
+    }
+  }
+}
