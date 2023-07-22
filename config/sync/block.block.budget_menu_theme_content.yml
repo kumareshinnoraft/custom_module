@@ -1,0 +1,22 @@
+uuid: 784e03da-ee60-4156-a68d-2233e8068ea3
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - budget_menu_theme
+_core:
+  default_config_hash: erQSEZF2XUjNmgTl0uNRBzmg18ZGXwUcw2FhApoeuHk
+id: budget_menu_theme_content
+theme: budget_menu_theme
+region: content
+weight: -7
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }

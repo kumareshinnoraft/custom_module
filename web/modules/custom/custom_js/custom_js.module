@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * This file adds javascript in the right position.
+ */
+
+/**
+ * Implements hook_page_attachments().
+ */
+function custom_js_page_attachments(array &$attachments) {
+  $attachments['#attached']['library'][] = 'custom_js/global-js';
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function custom_js_preprocess_node(&$variables) {
+  $node = $variables['node'];
+  // Replace 'movie' with the machine name of your content type (bundle).
+  if ($node->getType() === 'movie') {
+    $variables['#attached']['library'][] = 'custom_js/custom-bundle-js';
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for form templates.
+ */
+function custom_js_preprocess_form(&$variables) {
+  // Check if the form ID is 'contact_form'.
+  if ($variables['element']['#form_id'] === 'config_form_custom') {
+    // Attach the 'phone_number_formatter' library to the form.
+    $variables['#attached']['library'][] = 'custom_js/phone_number_formatter';
+  }
+}

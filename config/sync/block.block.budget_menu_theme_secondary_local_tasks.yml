@@ -1,0 +1,22 @@
+uuid: e787447f-a333-4c2f-86ee-921c17b9ed67
+langcode: en
+status: true
+dependencies:
+  theme:
+    - budget_menu_theme
+_core:
+  default_config_hash: ydSxdq7R66I8UMC460rOzlfzvlUL4VRbdwc6z9DWaUI
+id: budget_menu_theme_secondary_local_tasks
+theme: budget_menu_theme
+region: header
+weight: -5
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Secondary tabs'
+  label_display: '0'
+  provider: core
+  primary: false
+  secondary: true
+visibility: {  }

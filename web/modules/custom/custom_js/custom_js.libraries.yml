@@ -1,0 +1,14 @@
+global-js:
+  version: 1.x
+  js:
+    js/sitewide.js: {}
+
+custom-bundle-js:
+  version: 1.x
+  js:
+    js/custom_bundle_script.js: {}
+
+phone_number_formatter:
+  version: 1.x
+  js:
+    js/phone_number_formatter.js: {}

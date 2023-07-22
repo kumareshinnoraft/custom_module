@@ -1,0 +1,7 @@
+budget_menu.settings_form:
+  path: '/admin/config/system/budget-menu'
+  defaults:
+    _title: 'Budget Friendly Amount'
+    _form: 'Drupal\budget_menu\Form\SettingsForm'
+  requirements:
+    _permission: 'administer budget_menu configuration'

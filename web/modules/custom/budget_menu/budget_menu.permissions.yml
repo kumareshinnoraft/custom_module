@@ -1,0 +1,4 @@
+administer budget_menu configuration:
+  title: 'Administer budget_menu configuration'
+  description: 'Optional description.'
+  restrict access: true

@@ -1,0 +1,25 @@
+uuid: b42aee90-eb12-42f9-a0c5-775d069e348d
+langcode: en
+status: false
+dependencies:
+  module:
+    - cache_form
+    - system
+  theme:
+    - olivero
+id: olivero_cacheformblock
+theme: olivero
+region: content
+weight: 0
+provider: null
+plugin: cache_form_block
+settings:
+  id: cache_form_block
+  label: 'Cache Form Block'
+  label_display: visible
+  provider: cache_form
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: /cache-form

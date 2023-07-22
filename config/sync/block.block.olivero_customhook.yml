@@ -1,0 +1,25 @@
+uuid: 48d9683a-72de-49ad-afd8-fd5d70edc52f
+langcode: en
+status: true
+dependencies:
+  module:
+    - custom_hook
+    - system
+  theme:
+    - olivero
+id: olivero_customhook
+theme: olivero
+region: content
+weight: 0
+provider: null
+plugin: custom_hook_example
+settings:
+  id: custom_hook_example
+  label: 'Custom Hook'
+  label_display: visible
+  provider: custom_hook
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /custom-welcome-page
