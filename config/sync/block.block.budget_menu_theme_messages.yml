@@ -1,0 +1,22 @@
+uuid: 0e094cea-00b9-4658-88c8-b389908809d1
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - budget_menu_theme
+_core:
+  default_config_hash: BZ5tpW7H8X4PVGRm3MImTIHd2tN0eF7zOtp4SpRYUA0
+id: budget_menu_theme_messages
+theme: budget_menu_theme
+region: header
+weight: -7
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  label_display: '0'
+  provider: system
+visibility: {  }

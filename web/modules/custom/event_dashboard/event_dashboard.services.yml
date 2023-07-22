@@ -1,0 +1,5 @@
+services:
+  event_dashboard.event_counts_service:
+    class: Drupal\event_dashboard\Services\EventCountsService
+    arguments: ['@entity_type.manager']
+    interface: Drupal\event_dashboard\EventCountsServiceInterface

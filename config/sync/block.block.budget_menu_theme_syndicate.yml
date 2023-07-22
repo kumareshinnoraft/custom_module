@@ -1,0 +1,23 @@
+uuid: cfa534f4-4b91-436b-acd4-2cccef1524dc
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+  theme:
+    - budget_menu_theme
+_core:
+  default_config_hash: 0gq3VPg-_UM69FCCWurLFIrrnIjC2HLKhwo9iQNtcUo
+id: budget_menu_theme_syndicate
+theme: budget_menu_theme
+region: header
+weight: -8
+provider: null
+plugin: node_syndicate_block
+settings:
+  id: node_syndicate_block
+  label: 'RSS feed'
+  label_display: '0'
+  provider: node
+  block_count: 10
+visibility: {  }

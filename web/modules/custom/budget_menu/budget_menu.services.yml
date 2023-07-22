@@ -1,0 +1,9 @@
+services:
+  budget_menu.node_view_subscriber:
+    class: Drupal\budget_menu\EventSubscriber\BudgetMenuNodeViewSubscriber
+    arguments:
+      - '@config.factory'
+      - '@messenger'
+      - '@current_route_match'
+    tags:
+      - { name: 'event_subscriber' }

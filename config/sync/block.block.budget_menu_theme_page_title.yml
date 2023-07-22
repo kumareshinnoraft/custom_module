@@ -1,0 +1,20 @@
+uuid: a4ee1dc5-fa1f-42cf-80ed-ebcf38e163b4
+langcode: en
+status: true
+dependencies:
+  theme:
+    - budget_menu_theme
+_core:
+  default_config_hash: 6aOgWsNTXjqrDm98TXSAjP6qd2nCijD1xw45MrnbK-Y
+id: budget_menu_theme_page_title
+theme: budget_menu_theme
+region: header
+weight: -5
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility: {  }
