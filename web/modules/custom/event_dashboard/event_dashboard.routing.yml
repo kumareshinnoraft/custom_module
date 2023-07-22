@@ -6,3 +6,10 @@ event_dashboard.example:
   requirements:
     _permission: 'access content'
 
+event_dashboard.term_info_ajax:
+  path: '/admin/config/system/term-info-ajax'
+  defaults:
+    _title: 'Term info ajax'
+    _form: 'Drupal\event_dashboard\Form\TermInfoAjaxForm'
+  requirements:
+    _permission: 'administer site configuration'
