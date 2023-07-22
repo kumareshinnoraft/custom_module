@@ -1,0 +1,21 @@
+uuid: 235e5007-8aca-417b-a06c-8f958ae34c85
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_color
+    - node.type.article
+  module:
+    - custom_rgb
+id: node.article.field_color
+field_name: field_color
+entity_type: node
+bundle: article
+label: COlor
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: custom_rgb_field

@@ -1,0 +1,12 @@
+# First name is the name of the module and second one is the unique identifier
+# name for this router.
+hello_user.greet_user:
+  path: '/hello'
+  defaults:
+    _title: 'Hello User'
+    # This line calls the controller function.
+    _controller: '\Drupal\hello_user\Controller\HelloUserController::greetUser'
+  requirements:
+  # Access content allows all roles to access the page.
+    _permission: 'access content'
+

@@ -1,0 +1,23 @@
+uuid: 700d529a-4a5f-48a5-bc3b-6a11d87bccdb
+langcode: en
+status: true
+dependencies:
+  module:
+    - search
+  theme:
+    - budget_menu_theme
+_core:
+  default_config_hash: yEBET0cqDbk8dkWzaJw-8CKft0961VBflsISoSR6Lj8
+id: budget_menu_theme_search_form_narrow
+theme: budget_menu_theme
+region: header
+weight: -8
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: 'Search form (narrow)'
+  label_display: '0'
+  provider: search
+  page_id: ''
+visibility: {  }

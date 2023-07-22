@@ -1,0 +1,12 @@
+name: welcome
+type: module
+description: Shows user name with a short welcome message.
+package: Custom Modules
+core_version_requirement: ^9 || ^10
+
+# This dependency basically checks whether the webform is present in the 
+# composer or not if it not present it will not terminate the installation 
+# instead it will install modules.
+# dependencies:
+#   - webform:webform
+  

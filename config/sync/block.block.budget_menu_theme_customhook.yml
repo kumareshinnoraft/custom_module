@@ -1,0 +1,25 @@
+uuid: 7739ffc3-897f-473b-ac24-ba14e42e1dc6
+langcode: en
+status: true
+dependencies:
+  module:
+    - custom_hook
+    - system
+  theme:
+    - budget_menu_theme
+id: budget_menu_theme_customhook
+theme: budget_menu_theme
+region: content
+weight: 0
+provider: null
+plugin: custom_hook_example
+settings:
+  id: custom_hook_example
+  label: 'Custom Hook'
+  label_display: visible
+  provider: custom_hook
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /custom-welcome-page

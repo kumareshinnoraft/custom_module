@@ -1,0 +1,22 @@
+uuid: 7ebebfc5-e17c-4b47-bc17-17227f6f579a
+langcode: en
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - budget_menu_theme
+_core:
+  default_config_hash: VfPFqqxfkomud5CO8DUijw85QIl9GIxh_nIxLOYESxg
+id: budget_menu_theme_help
+theme: budget_menu_theme
+region: header
+weight: 0
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  label_display: '0'
+  provider: help
+visibility: {  }
