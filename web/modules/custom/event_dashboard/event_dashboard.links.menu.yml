@@ -1,0 +1,9 @@
+event_dashboard.settings_form:
+  title: 'Event Dashboard'
+  description: 'Event related dashboard.'
+  route_name: event_dashboard.example
+  parent: system.admin
+  weight: 5
+  
+help:
+  weight: 10
