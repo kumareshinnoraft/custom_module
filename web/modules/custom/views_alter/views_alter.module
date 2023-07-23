@@ -1,0 +1,47 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for views_alter module.
+ */
+
+use Drupal\views\Plugin\views\query\QueryPluginBase;
+use Drupal\views\ViewExecutable;
+
+/**
+ * Implements hook_views_query_alter().
+ */
+function views_alter_views_query_alter(ViewExecutable $view, QueryPluginBase $query)
+{
+  if ($view->id() === 'unsorted_list' && $view->current_display === 'page_1') {
+    $query->orderby = [
+      [
+        'field' => 'title',
+        'direction' => 'ASC',
+      ],
+    ];
+  }
+}
+
+/**
+ * Implements hook_views_data_alter().
+ */
+function views_alter_views_data_alter(array &$data) {
+  // Add a relationship for the user entity.
+  $data['node_field_data']['user'] = [
+    'title' => t('Author User Relationship'),
+    'help' => t('Relate node to the user entity.'),
+    'relationship' => [
+      'base' => 'users_field_data',
+      'base field' => 'uid',
+      'relationship field' => 'uid',
+      'handler' => 'views_handler_relationship',
+      'label' => t('Author User Relationship Label'),
+      'title' => t('Author User Relationship Title'),
+      'id' => 'standard',
+    ],
+  ];
+
+  $data['node_field_data']['nid']['title'] = t('Content ID');
+  $data['node_field_data']['nid']['help'] = t('Use this to display Node ID in every row.');
+}

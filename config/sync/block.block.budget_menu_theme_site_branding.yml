@@ -1,0 +1,25 @@
+uuid: 4fb0bfff-139a-40d8-805e-7a5f7889203b
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - budget_menu_theme
+_core:
+  default_config_hash: n_nlgjggHVfQt2H__zvLOKB2YtjPDbQ5tHijF9LE1aM
+id: budget_menu_theme_site_branding
+theme: budget_menu_theme
+region: header
+weight: -8
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  label_display: '0'
+  provider: system
+  use_site_logo: true
+  use_site_name: true
+  use_site_slogan: false
+visibility: {  }

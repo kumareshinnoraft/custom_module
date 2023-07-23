@@ -1,0 +1,25 @@
+uuid: 240c3957-25ff-4e8c-9b14-120b236852bc
+langcode: en
+status: false
+dependencies:
+  module:
+    - hello_block
+    - system
+  theme:
+    - budget_menu_theme
+id: budget_menu_theme_helloblock
+theme: budget_menu_theme
+region: content
+weight: -6
+provider: null
+plugin: hello_block
+settings:
+  id: hello_block
+  label: 'Hello block'
+  label_display: visible
+  provider: hello_block
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /welcome

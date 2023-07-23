@@ -1,0 +1,15 @@
+
+# Default value.
+field.value.custom_rgb_field:
+  type: mapping
+  label: Default value
+  mapping:
+    six_digit_hex_code:
+      type: string
+      label: 6-digit hex code
+    rgb_value:
+      type: string
+      label: RGB value
+    color_picker:
+      type: string
+      label: Color Picker

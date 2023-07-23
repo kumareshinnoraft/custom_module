@@ -1,0 +1,36 @@
+uuid: c1f07456-c28f-43e4-9854-539411d5ef8c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.article.body
+    - field.field.node.article.comment
+    - field.field.node.article.field_body
+    - field.field.node.article.field_color
+    - field.field.node.article.field_tags
+    - node.type.article
+  module:
+    - custom_rgb
+    - user
+id: node.article.default
+targetEntityType: node
+bundle: article
+mode: default
+content:
+  field_color:
+    type: colored_text_formatter
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  body: true
+  comment: true
+  field_body: true
+  field_tags: true

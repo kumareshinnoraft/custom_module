@@ -1,0 +1,4 @@
+access the custom page:
+  title: 'Administer routing configuration'
+  description: 'Optional description.'
+  restrict access: true
