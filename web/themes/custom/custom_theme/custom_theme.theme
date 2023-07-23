@@ -21,7 +21,7 @@ function custom_theme_preprocess_page(&$variables) {
       ->view($webform);
 
     // Load the paragraph.
-    $paragraph_id = 1;
+    $paragraph_id = 3;
     $paragraph = \Drupal::entityTypeManager()->getStorage('paragraph')->load($paragraph_id);
     // Pass the paragraph to the template.
     $variables['paragraph'] = \Drupal::entityTypeManager()
