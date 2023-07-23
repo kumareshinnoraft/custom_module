@@ -59,12 +59,12 @@
 }
 
 a.toolbar-icon.toolbar-icon-event-dashboard-settings-form::before{
-  background-image: url('https://icons.veryicon.com/png/o/miscellaneous/r-definition/event-20.png');
+  background-image: url('../../../../sites/default/files/icons/event_admin_menu_icon.png');
   opacity: 0.6;
 }
 
 a.toolbar-icon.toolbar-icon-event-dashboard-settings-form:active::before,
 a.toolbar-icon.toolbar-icon-event-dashboard-settings-form.is-active::before{
-  background-image: url('https://icons.veryicon.com/png/o/miscellaneous/r-definition/event-20.png');
+  background-image: url('../../../../sites/default/files/icons/event_admin_menu_icon.png');
   opacity: 1;
 }

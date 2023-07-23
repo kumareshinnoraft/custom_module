@@ -1,10 +1,10 @@
 a.toolbar-icon.toolbar-icon-budget-menu-settings-form::before{
-  background-image: url('https://freepngimg.com/download/camera/145238-camera-vector-film-photos-free-hq-image.png');
+  background-image: url('../../../../sites/default/files/icons/movie_admin_menu_icon.png');
   opacity: 0.6;
 }
 
 a.toolbar-icon.toolbar-icon-budget-menu-settings-form:active::before,
 a.toolbar-icon.toolbar-icon-budget-menu-settings-form.is-active::before{
-  background-image: url('https://freepngimg.com/download/camera/145238-camera-vector-film-photos-free-hq-image.png');
+  background-image: url('../../../../sites/default/files/icons/movie_admin_menu_icon.png');
   opacity: 1;
 }
