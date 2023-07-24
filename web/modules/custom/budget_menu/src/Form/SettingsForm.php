@@ -2,6 +2,7 @@
 
 namespace Drupal\budget_menu\Form;
 
+use Drupal\Core\Cache\Cache;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 
@@ -50,6 +51,7 @@ class SettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    Cache::invalidateTags(['node_list']);
     $this->config('budget_menu.settings')
       ->set('budget_friendly_amount', $form_state->getValue('budget_friendly_amount'))
       ->save();
