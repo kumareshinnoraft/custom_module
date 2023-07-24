@@ -21,18 +21,30 @@ function budget_menu_entity_view(array &$build, EntityInterface $entity, EntityV
     // Get the budget amount from the node field.
     $node_budget_amount = $entity->get('field_price')->value;
 
-    // Compare the budget amounts and set the corresponding text.
-    if ($budget_amount > $node_budget_amount) {
-      $status = 'The movie is under budget';
-      $color = 'yellow';
-    }
-    elseif ($budget_amount < $node_budget_amount) {
-      $status = 'The movie is over budget';
-      $color = 'red';
-    }
-    else {
-      $status = 'The movie is within budget';
-      $color = 'green';
+    if ($node_budget_amount) {
+
+      // Compare the budget amounts and set the corresponding text.
+      if ($budget_amount > $node_budget_amount) {
+        $status = 'The movie is under budget';
+        $color = 'yellow';
+      }
+      elseif ($budget_amount < $node_budget_amount) {
+        $status = 'The movie is over budget';
+        $color = 'red';
+      }
+      else {
+        $status = 'The movie is within budget';
+        $color = 'green';
+      }
+
+      $build['budget_status'] = [
+        '#type' => 'html_tag',
+        '#tag' => 'p',
+        '#value' => $status,
+        '#attributes' => [
+          'style' => 'background-color:' . $color . ';',
+        ],
+      ];
     }
 
     $build['budget_status'] = [
