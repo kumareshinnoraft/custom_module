@@ -78,7 +78,7 @@ class BudgetMenuNodeViewSubscriber implements EventSubscriberInterface {
         // Get the budget amount from the node field.
         $node_budget_amount = $node->get('field_price')->value;
 
-        if ($node_budget_amount) {
+        if ($node_budget_amount && $budget_amount) {
 
           // Compare the budget amounts and set the corresponding status.
           if ($budget_amount > $node_budget_amount) {
