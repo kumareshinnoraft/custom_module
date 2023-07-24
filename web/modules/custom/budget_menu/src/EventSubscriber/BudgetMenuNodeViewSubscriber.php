@@ -78,17 +78,20 @@ class BudgetMenuNodeViewSubscriber implements EventSubscriberInterface {
         // Get the budget amount from the node field.
         $node_budget_amount = $node->get('field_price')->value;
 
-        // Compare the budget amounts and set the corresponding status.
-        if ($budget_amount > $node_budget_amount) {
-          $status = 'The movie is under budget';
+        if ($node_budget_amount) {
+
+          // Compare the budget amounts and set the corresponding status.
+          if ($budget_amount > $node_budget_amount) {
+            $status = 'The movie is under budget';
+          }
+          elseif ($budget_amount < $node_budget_amount) {
+            $status = 'The movie is over budget';
+          }
+          else {
+            $status = 'The movie is within budget';
+          }
+          $this->messenger->addMessage($status);
         }
-        elseif ($budget_amount < $node_budget_amount) {
-          $status = 'The movie is over budget';
-        }
-        else {
-          $status = 'The movie is within budget';
-        }
-        $this->messenger->addMessage($status);
       }
     }
   }
