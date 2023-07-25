@@ -51,7 +51,7 @@ class SettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    Cache::invalidateTags(['node_list']);
+    Cache::invalidateTags(['node_view']);
     $this->config('budget_menu.settings')
       ->set('budget_friendly_amount', $form_state->getValue('budget_friendly_amount'))
       ->save();

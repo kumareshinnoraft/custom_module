@@ -44,9 +44,6 @@ function budget_menu_entity_view(array &$build, EntityInterface $entity, EntityV
         '#attributes' => [
           'style' => 'background-color:' . $color . ';',
         ],
-        '#cache' => [
-          'tags' => 'node_list',
-        ],
       ];
     }
 
