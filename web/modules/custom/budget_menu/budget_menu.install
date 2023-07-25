@@ -5,13 +5,22 @@
  * Install, update and uninstall functions for the budget_menu module.
  */
 
+use Drupal\Core\Cache\Cache;
 use Drupal\user\Entity\Role;
 
 /**
  * Implements hook_install().
  */
 function budget_menu_install() {
+  Cache::invalidateTags(['node_view']);
   $role_object = Role::load('content_editor');
   $role_object->grantPermission('administer budget_menu configuration');
   $role_object->save();
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function budget_form_uninstall() {
+  \Drupal::configFactory()->getEditable('budget_menu.settings')->delete();
 }
