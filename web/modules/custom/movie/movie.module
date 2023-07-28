@@ -5,6 +5,8 @@
  * This file will count whether any movie node is present or not.
  */
 
+use Drupal\Core\Form\FormStateInterface;
+
 /**
  * Helper function to determine if a user has movie posts already.
  *
@@ -21,4 +23,27 @@ function movie_counter($account = NULL) {
   }
   return $query->count()
     ->execute();
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function movie_form_award_movie_delete_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // For nodes, modify the title and description as needed.
+  $form['#title'] = t('Confirm deletion of movie');
+  $form['actions']['submit']['#submit'][] = 'movie_award_movie_delete_form_submit';
+}
+
+/**
+ * Form submit handler for award movie delete form.
+ */
+function movie_award_movie_delete_form_submit(&$form, FormStateInterface $form_state) {
+
+  // Unset the default messages.
+  $messenger = \Drupal::messenger();
+  $messenger->deleteByType('status');
+  $messenger->deleteByType('error');
+
+  // Set a custom message using the messenger service.
+  $messenger->addMessage(t('Movie has been deleted.'));
 }
