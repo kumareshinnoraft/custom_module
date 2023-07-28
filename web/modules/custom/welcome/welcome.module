@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for welcome module.
+ */
+
+/**
+ * Implements hook_items_list().
+ */
+function welcome_items_list($array) {
+  // Using custom hook provides this $array.
+  // dd($array);
+}

@@ -1,0 +1,21 @@
+uuid: 33c9a4ce-3091-4455-9c6b-5f16efe60f36
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_colro
+    - node.type.article
+  module:
+    - custom_rgb
+id: node.article.field_colro
+field_name: field_colro
+entity_type: node
+bundle: article
+label: COLRO
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: custom_rgb_field

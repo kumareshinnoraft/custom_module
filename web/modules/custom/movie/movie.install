@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * This file deletes the content type at the time of uninstalling the module.
+ */
+
+use Drupal\node\Entity\NodeType;
+
+/**
+ * Implements hook_uninstall().
+ */
+function movie_uninstall() {
+  $type = 'movie';
+  $type_exists = \Drupal::entityTypeManager()->getStorage('node_type')->load($type);
+
+  if ($type_exists) {
+    NodeType::load($type)->delete();
+  }
+}
