@@ -93,8 +93,4 @@ web/modules/custom/menu_list/
 web/modules/custom/debug_cache_context/
 web/modules/custom/import_context/
 web/modules/custom/debug_database/
-
-
-entityTypeManager->getStorage->getHandler->
-
-handler type and defination found then it will create a instance for you, calls EntityStorageBase, which will call loadByProperties,then it call entity.query.sql
+web/modules/custom/debug_entity/
