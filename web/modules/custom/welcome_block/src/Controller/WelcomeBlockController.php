@@ -15,7 +15,7 @@ class WelcomeBlockController extends ControllerBase {
    * Demo route controller.
    *
    * @return array
-   *   This render array returns the output of the page.
+   *   This render array returns the output of the page
    */
   public function build() {
 
