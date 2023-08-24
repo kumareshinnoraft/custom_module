@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * @file
+ * This file will count whether any event node is present or not.
+ */
+
+/**
+ * Helper function to determine if a user has event posts already.
+ *
+ * @return string
+ *   Count of blog posts.
+ */
+function event_dashboard_counter($account = NULL) {
+  $query = \Drupal::entityQuery('node')
+    ->condition('type', 'event')
+    ->condition('status', 1)
+    ->accessCheck(TRUE);
+  if ($account !== NULL) {
+    $query->condition('uid', $account->id());
+  }
+  return $query->count()
+    ->execute();
+}
+
+/**
+ * Implements hook_theme().
+ */
+function event_dashboard_theme() {
+  return [
+    'statistics' => [
+      'variables' => [
+        'yearly_counts' => [],
+        'quarterly_counts' => [],
+        'type_counts' => [],
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_toolbar_alter().
+ */
+function event_dashboard_toolbar_alter(&$items) {
+  $items['administration']['#attached']['library'][] = 'event_dashboard/event_dashboard_styles';
+}

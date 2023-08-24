@@ -1,0 +1,5 @@
+name: event_dashboard
+type: module
+description: This provides a dashboard.
+package: Custom Module
+core_version_requirement: ^9 || ^10

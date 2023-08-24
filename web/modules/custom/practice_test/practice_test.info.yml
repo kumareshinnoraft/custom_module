@@ -1,0 +1,5 @@
+name: practice_test
+type: module
+description: This module will be used to for the practice set.
+package: Custom Module
+core_version_requirement: ^9 || ^10

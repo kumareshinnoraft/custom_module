@@ -1,0 +1,70 @@
+/* CSS for the event dashboard tables */
+
+/* Container to arrange columns using Flexbox */
+.event-dashboard-container {
+  display: flex;
+  flex-wrap: wrap; /* Allow columns to wrap to the next row if necessary */
+  justify-content: space-between; /* Distribute columns evenly */
+}
+
+/* Tables */
+.event-dashboard-table {
+  width: 100%;
+  max-width: 400px; /* Limit the maximum width of the table */
+  border-collapse: collapse;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+}
+
+/* Table headers */
+.event-dashboard-table thead th {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+}
+
+/* Table cells */
+.event-dashboard-table tbody td {
+  padding: 8px;
+  text-align: center;
+}
+
+/* Alternating row colors for better readability */
+.event-dashboard-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Add some space between the tables */
+.event-dashboard-table + .event-dashboard-table {
+  margin-top: 30px;
+}
+
+/* Center the text in table cells */
+.event-dashboard-table td {
+  text-align: center;
+}
+
+/* Reduce font size of table headers and data */
+.event-dashboard-table thead th,
+.event-dashboard-table tbody td {
+  font-size: 14px;
+}
+
+/* Style the table caption (title) */
+.event-dashboard-table-caption {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+a.toolbar-icon.toolbar-icon-event-dashboard-settings-form::before{
+  background-image: url('../../../../sites/default/files/icons/event_admin_menu_icon.png');
+  opacity: 0.6;
+}
+
+a.toolbar-icon.toolbar-icon-event-dashboard-settings-form:active::before,
+a.toolbar-icon.toolbar-icon-event-dashboard-settings-form.is-active::before{
+  background-image: url('../../../../sites/default/files/icons/event_admin_menu_icon.png');
+  opacity: 1;
+}

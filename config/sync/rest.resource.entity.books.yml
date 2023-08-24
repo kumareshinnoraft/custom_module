@@ -1,0 +1,38 @@
+uuid: 88b1a028-e524-43bb-b573-1be8d05db6cd
+langcode: en
+status: true
+dependencies:
+  module:
+    - books
+    - serialization
+    - user
+_core:
+  default_config_hash: xHyxCTL0IXpFWF4wbzZqvCYY0198uPNbEPkGsZecS-w
+id: entity.books
+plugin_id: 'entity:books'
+granularity: method
+configuration:
+  GET:
+    supported_formats:
+      - json
+      - xml
+    supported_auth:
+      - cookie
+  POST:
+    supported_formats:
+      - json
+      - xml
+    supported_auth:
+      - cookie
+  PATCH:
+    supported_formats:
+      - json
+      - xml
+    supported_auth:
+      - cookie
+  DELETE:
+    supported_formats:
+      - json
+      - xml
+    supported_auth:
+      - cookie

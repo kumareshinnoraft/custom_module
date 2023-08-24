@@ -1,0 +1,13 @@
+services:
+  event_dashboard.event_counts_service:
+    class: Drupal\event_dashboard\Services\EventCountsService
+    arguments: ['@entity_type.manager']
+    interface: Drupal\event_dashboard\EventCountsServiceInterface
+
+  event_dashboard.uninstall_validator:
+    class: Drupal\event_dashboard\EventUninstallValidator
+    arguments:
+      - '@string_translation'
+    tags:
+      - { name: module_install.uninstall_validator }
+    lazy: true

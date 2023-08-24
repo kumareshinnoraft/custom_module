@@ -1,0 +1,5 @@
+name: views_alter
+type: module
+description: This module will alter the view.
+package: Custom Module
+core_version_requirement: ^9 || ^10

@@ -1,0 +1,8 @@
+practice_test.example:
+  path: '/api/org_chart'
+  defaults:
+    _controller: '\Drupal\practice_test\Controller\PracticeTestController::build'
+    _format: 'json'
+  methods: [GET]
+  requirements:
+    _permission: 'access content'

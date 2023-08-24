@@ -1,0 +1,15 @@
+name: custom_js
+type: module
+description: THis module will provide sitewide js.
+package: Custom Module
+core_version_requirement: ^9 || ^10
+
+libraries:
+  global-js:
+    version: 1.x
+    js:
+      js/sitewide.js: {}
+  custom-bundle-js:
+    version: 1.x
+    js:
+      js/custom_bundle_script.js: {}

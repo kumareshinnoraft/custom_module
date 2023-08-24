@@ -1,0 +1,25 @@
+uuid: 422dae88-efbb-46a1-83c0-ddfe2170839f
+langcode: en
+status: false
+dependencies:
+  module:
+    - cache_form
+    - system
+  theme:
+    - budget_menu_theme
+id: budget_menu_theme_cacheformblock
+theme: budget_menu_theme
+region: content
+weight: 0
+provider: null
+plugin: cache_form_block
+settings:
+  id: cache_form_block
+  label: 'Cache Form Block'
+  label_display: visible
+  provider: cache_form
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: /cache-form
